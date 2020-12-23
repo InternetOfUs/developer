@@ -1,6 +1,18 @@
 module.exports = {
-  someSidebar: {
-    Docusaurus: ['doc1', 'doc2', 'doc3'],
-    Features: ['mdx'],
-  },
+  someSidebar: [
+    {
+        type: 'category',
+        label: 'Conversation',
+        items: [
+            'conversation/models'
+        ],
+    },
+    {
+        type: 'category',
+        label: 'Use cases',
+        items: [
+            'usecase/ask-for-help'
+        ],
+    },
+  ],
 };

@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'My Site',
+  title: 'Developer',
   tagline: 'The tagline of my site',
   url: 'https://InternetOfUs.github.io',
   baseUrl: '/developer/',
@@ -10,20 +10,20 @@ module.exports = {
   projectName: 'developer', // Usually your repo name.
   themeConfig: {
     navbar: {
-      title: 'My Site',
+      title: 'Developer',
       logo: {
-        alt: 'My Site Logo',
-        src: 'img/logo.svg',
+        alt: 'WeNet logo',
+        src: 'img/logo.jpg',
       },
       items: [
         {
-          to: 'docs/',
+          to: 'docs/conversation/models',
           activeBasePath: 'docs',
           label: 'Docs',
           position: 'left',
         },
         {
-          href: 'https://github.com/facebook/docusaurus',
+          href: 'https://github.com/InternetOfUs/developer',
           label: 'GitHub',
           position: 'right',
         },
@@ -31,52 +31,8 @@ module.exports = {
     },
     footer: {
       style: 'dark',
-      links: [
-        {
-          title: 'Docs',
-          items: [
-            {
-              label: 'Style Guide',
-              to: 'docs/',
-            },
-            {
-              label: 'Second Doc',
-              to: 'docs/doc2/',
-            },
-          ],
-        },
-        {
-          title: 'Community',
-          items: [
-            {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
-            },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'Blog',
-              to: 'blog',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
-            },
-          ],
-        },
-      ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      links: [],
+      // copyright: `Copyright © ${new Date().getFullYear()} WeNet. Built with Docusaurus.`,
     },
   },
   presets: [
