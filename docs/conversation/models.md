@@ -31,8 +31,8 @@ The Task model is made of by the following parameters:
 | `appId` | _string_ | The id of the app in which the task was generated | `false` |
 | `communityId` | _string_ \| _null_ | The identifier of a community the task is meant for | `false` |
 | `requesterId` | _string_ | The wenet id of the task creator | `false` |
-| `goal` | _dict_ | The wenet id of the task creator | `false` |
-| `closeTs` | _int_ \| _null_ | The wenet id of the task creator | `true` |
+| `goal` | _dict_ | The Task Goal object about the task. See below for more details | `false` |
+| `closeTs` | _int_ \| _null_ | The UTC epoch timestamp representing the instant of the end of the task | `true` |
 | `norms` | _list_ | The list of norms associated to the task | `false` |
 | `attributes` | _list_ | The list of specific attributes of the task | `false` |
 | `transactions` | _list_ | The complete list of transactions that were applied to the task | `true` |
@@ -41,7 +41,7 @@ The Task model is made of by the following parameters:
 
 The Task goal is composed by the following parameters:
 
-| Parameter | Type | Description | Read only | Nullable |
+| Parameter | Type | Description | Read only |
 | ------------- | ----------- | ----- | -----: |
 | `name` | _string_ \| _null_ | The goal name | `false` |
 | `description` | _string_ \| _null_ | TThe goal descriptione | `false` |
@@ -62,7 +62,7 @@ The Transaction model is made of by the following parameters:
 | `label` | _string_ | The identifier of the transaction type | `false` |
 | `attributes` | _list_ | The list of specific attributes of the transaction | `false` |
 | `actioneerId` | _string_ | The wenet id of the transaction creator | `false` |
-| `messages` | _list_ | The wenet id of the transaction creator | `false` |
+| `messages` | _list_ | The list of messages generated due to the transaction | `false` |
 | `_creationTs` | _int_ | The UTC epoch timestamp representing the creation instant | `true` |
 | `_lastUpdateTs` | _int_ | The UTC epoch timestamp representing the last update instant | `true` |
 
