@@ -1,17 +1,27 @@
 module.exports = {
-  someSidebar: [
+  tech: [
     {
         type: 'category',
         label: 'Conversation',
         items: [
-            'conversation/models'
+            'tech/conversation/models'
         ],
     },
     {
         type: 'category',
         label: 'Use cases',
         items: [
-            'usecase/ask-for-help'
+            'tech/usecase/ask-for-help'
+        ],
+    },
+  ],
+  pilot: [
+    'pilot/intro',
+    {
+        type: 'category',
+        label: 'Pilots',
+        items: [
+            'pilot/pilots/m26'
         ],
     },
   ],

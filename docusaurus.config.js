@@ -17,8 +17,16 @@ module.exports = {
       },
       items: [
         {
-          to: 'docs/conversation/models',
-          activeBasePath: 'docs',
+          doc: 'pilot',
+          to: 'docs/pilot/intro',
+          activeBasePath: 'docs/pilot',
+          label: 'Pilots',
+          position: 'left',
+        },
+        {
+          doc: 'tech',
+          to: 'docs/tech/conversation/models',
+          activeBasePath: 'docs/tech',
           label: 'Docs',
           position: 'left',
         },
@@ -42,6 +50,8 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
+          showLastUpdateAuthor: false,
+          showLastUpdateTime: true,
           editUrl:
             'https://github.com/facebook/docusaurus/edit/master/website/',
         },
