@@ -87,6 +87,7 @@ The following messages are supported.
 
 * notify there is a new question to answer to
 * notify there is a new answer to a question
+* notify the provided answer has been marked as the preferred one
 
 #### Question to answer
 
@@ -116,3 +117,12 @@ Its attributes are:
 :::note
 If access to the complete list of answers is required, this can be done by accessing the updated details of a task.
 :::
+
+#### Answer picked
+
+It is identified by the label `AnsweredPickedMessage`.
+
+| Attribute | Type | Description |
+| ------------- | ---- | ----------- |
+| `taskId` | _string_ | The id of the task assiciated with the question |
+| `transactionId` | _string_ | The id of the transaction associated to the answer |

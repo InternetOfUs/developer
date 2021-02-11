@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'Developer',
+  title: 'Docs',
   tagline: 'The tagline of my site',
   url: 'https://InternetOfUs.github.io',
   baseUrl: '/developer/',
@@ -10,7 +10,7 @@ module.exports = {
   projectName: 'developer', // Usually your repo name.
   themeConfig: {
     navbar: {
-      title: 'Developer',
+      title: 'Docs',
       logo: {
         alt: 'WeNet logo',
         src: 'img/logo.jpg',
@@ -18,16 +18,16 @@ module.exports = {
       items: [
         {
           doc: 'pilot',
-          to: 'docs/pilot/intro',
-          activeBasePath: 'docs/pilot',
-          label: 'Pilots',
+          to: 'docs/platform/intro',
+          activeBasePath: 'docs/platform',
+          label: 'The Platform',
           position: 'left',
         },
         {
           doc: 'tech',
           to: 'docs/tech/conversation/models',
           activeBasePath: 'docs/tech',
-          label: 'Docs',
+          label: 'Developer',
           position: 'left',
         },
         {

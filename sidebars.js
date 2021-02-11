@@ -16,12 +16,13 @@ module.exports = {
     },
   ],
   pilot: [
-    'pilot/intro',
+    'platform/intro',
+    'platform/hub',
     {
         type: 'category',
         label: 'Pilots',
         items: [
-            'pilot/pilots/m26'
+            'platform/pilots/m26'
         ],
     },
   ],
