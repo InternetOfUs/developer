@@ -16,6 +16,22 @@ yarn start
 
 This command starts a local development server and open up a browser window. Most changes are reflected live without having to restart the server.
 
+## Local Development with docker
+
+Instead to install the necessary software in your computer, you can start a docker environment for development with the script:
+
+```console
+startDevelopmentEnvironment.sh
+```
+
+You can stop the development environment with the script:
+
+```console
+stopDevelopmentEnvironment.sh
+```
+
+
+
 ## Build
 
 ```console
