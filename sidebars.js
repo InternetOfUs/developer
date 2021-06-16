@@ -4,7 +4,8 @@ module.exports = {
         type: 'category',
         label: 'Conversation',
         items: [
-            'tech/conversation/models'
+            'tech/conversation/models',
+            'tech/conversation/norms'
         ],
     },
     {
