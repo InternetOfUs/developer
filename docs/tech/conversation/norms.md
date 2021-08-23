@@ -424,6 +424,8 @@ These actions are done over the user that is associated with the norm engine, th
 
 - ``send_user_message(Label,Content)``
   This action posts a callback message to the user.
+  If it is done over an active transaction it is stored in it and notify
+  the incentive server that the message is sent.
     * ``Label`` _Input_  string with the message label.
     * ``Content`` _Input_  JSON model with the message content.
 - ``merge_user_state(State)``
@@ -455,8 +457,10 @@ These actions are done in the task that is associated with the received message.
 - ``add_created_transaction()``
  This action adds a new transaction to the task that represents that the creation
  of the task.
+ It also notifies the incentive server that the task is created.
 - ``add_message_transaction()``
   This action adds the transaction defined on the received message into the task.
+  It also notifies the incentive server that the transaction is done.
 - ``put_task_attribute(Key,Value)``
   This action changes an attribute of the current task model.
     * ``Key``  _Input_  string with the name of the task attribute.
@@ -489,10 +493,33 @@ These actions interact with the other components of the WeNet platform.
     * ``UserId``  _Input_  strings identifier of the user to receive the message.
     * ``Particle``  _Input_  string with the message particle.
     * ``Content``  _Input_  JSON model with the message content.
-- ``notify_incentive_server(Action,Message)``
-  This action notifies the incentive server about a change of the task.
-    * ``Action``  _Input_  string with the action that has changed the task.
-    * ``Message``  _Input_  string that explains the change.
+- ``notify_incentive_server_task_created(TaskTypeId,Count)``
+  This action notifies the incentive server that a user has created a task of the specific task type.
+	* ``TaskTypeId``  _Input_  string with the identifier of the task type associated with the created task.
+    * ``Count``  _Input_  integer the number of times the user has created a task of the specific task type in the community.
+- ``notify_incentive_server_task_created(TaskTypeId)``
+  This action notifies the incentive server that a user has created a task of the specific task type.
+  The number of times the task is created is counted by the user, task type and community.
+	* ``TaskTypeId``  _Input_  string with the identifier of the task type associated with the created task.
+- ``notify_incentive_server_task_created()``
+  This action notifies the incentive server that a user has created a task.
+  The number of times the task is created is counted by the user, task type and community.
+- ``notify_incentive_server_transaction_done(Label)``
+  This action notifies the incentive server that a task transaction is done.
+  The number of times the transaction is done is counted by the user, task type and community.
+    * ``Label``  _Input_  string with the label of the transaction that has been done.
+- ``notify_incentive_server_transaction_done(Label,Count)``
+  This action notifies the incentive server that a task transaction is done Count times in the community.
+    * ``Label``  _Input_  string with the label of the transaction that has been done.
+    * ``Count``  _Input_  integer the number of times the user has done the transaction on the community for the current task type.
+- ``notify_incentive_server_message_sent(Label)``
+  This action notifies the incentive server that a message is sent to the user.
+  The number of times the message is sent to the user is counted by the user, task type and community.
+    * ``Label``  _Input_  string with the label of the sent message.
+- ``notify_incentive_server_transaction_done(Label,Count)``
+  This action notifies the incentive server that a message is sent to the user Count times in the community.
+    * ``Label``  _Input_  string with the label of the sent message.
+    * ``Count``  _Input_  integer the number of times the message is sent to the user on the community for the current task type.
 - ``notify_volunteers_to_social_context_builder(Volunteers,UserId)``
   This action notifies the social context builder about the volunteers to do a task.
     * ``Volunteers``  _Input_  array of strings with the user identifiers that has volunteer to do a task.
@@ -1072,3 +1099,35 @@ The next predicates are used to interact with the personal context builder compo
     * ``Locations``  _Input_  array of JSON models with the locations to filter.
     * ``Min``  _Input_  number with the minimum distance in meters to the source location. The distance is inclusive.
     * ``Max``  _Input_  number with the maximum distance in meters to the source location. The distance is inclusive.
+    
+## Deprecated predicates
+
+The  predicates of this section are only for backward compatibility, but you should avoid
+to use them.
+
+
+### Incentive server
+
+- ``notify_incentive_server(Action,Message)``
+  This action notifies the incentive server about a change of the task.
+  This function is no more available on the incentive server API. So nothings do.
+    * ``Action``  _Input_  string with the action that has changed the task.
+    * ``Message``  _Input_  string that explains the change. 
+
+- ``wenet_incentive_server_update_task_status(Updated,Status)``
+  This predicate is used to update the task status.
+  This function is no more available on the incentive server API. So nothings do.
+    * ``Updated``  _Output_  JSON model with the updated status.
+    * ``Status``  _Input_  JSON model with the task status to update.
+    
+- ``wenet_new_task_status(Status,AppId,UserId,CommunityId,TaskId,Action,Message)``
+  This predicate is used to create the task status.
+  This data model is no more used.
+    * ``Status``  _Output_  JSON model with the status.
+    * ``AppId``  _Input_  string with the application identifier of the status.
+    * ``UserId``  _Input_  string with the user identifier of the status.
+    * ``CommunityId``  _Input_  string with the community identifier of the status.
+    * ``TaskId``  _Input_  string with the task identifier of the status.
+    * ``Action``  _Input_  string with the action of the status.
+    * ``Message``  _Input_  string with the message of the status.
+
