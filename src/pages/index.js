@@ -8,32 +8,30 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: 'Easy to Use',
+    title: 'Pilots',
     imageUrl: 'img/undraw_docusaurus_mountain.svg',
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Learn about the past and up-coming WeNet pilots.
+        Where are they taking place and who is parcicipating?
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
+    title: 'Use cases',
     imageUrl: 'img/undraw_docusaurus_tree.svg',
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Learn about the available use cases and applications that have been built on top of the platform.
       </>
     ),
   },
   {
-    title: 'Powered by React',
+    title: 'Join the community',
     imageUrl: 'img/undraw_docusaurus_react.svg',
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Join the WeNet community, it is so easy! Simply create an account on the WeNet HUB.
       </>
     ),
   },

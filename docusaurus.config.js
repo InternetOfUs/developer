@@ -1,6 +1,6 @@
 module.exports = {
-  title: 'Docs',
-  tagline: 'The tagline of my site',
+  title: 'WeNet Documentation',
+  tagline: 'The WeNet documentation website.',
   url: 'https://InternetOfUs.github.io',
   baseUrl: '/developer/',
   onBrokenLinks: 'throw',
