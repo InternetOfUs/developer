@@ -12,7 +12,8 @@ module.exports = {
         type: 'category',
         label: 'Use cases',
         items: [
-            'tech/usecase/ask-for-help'
+            'tech/usecase/ask-for-help',
+            'tech/usecase/ask-for-helpv2'
         ],
     },
   ],
