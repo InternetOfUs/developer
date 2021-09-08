@@ -44,7 +44,7 @@ Its attributes are:
 | Attribute | Type | Description |
 | ------------- | ---- | ----------- |
 | `answer` | _string_ | The answer given by the user to the question |
-| `anonymous` | _boolean_ | Whether to answer the question anonymously or not |
+| `anonymous` | _boolean_ | Whether to answer the question anonymously or not, if anonymous is chosen then the name of the user will not be shown |
 
 #### Ignore a question
 
