@@ -108,7 +108,7 @@ Its attributes are:
 | `userId` | _string_ | The id of the user who proposed the question |
 | `sensitive` | _boolean_ | Whether the question is sensitive or not, if it is sensitive the bot will let other people know to take extra care in answering the question |
 | `anonymous` | _boolean_ | Whether to ask the question anonymously or not, if anonymous is chosen then the name of the user will not be shown |
-| `positionOfAnswerer` | _enum_ [`nearby`, `anywhere`] | The position of user should answer the question |
+| `positionOfAnswerer` | _enum_ [`nearby`, `anywhere`] | How close the users should be to receive the question, if nearby is chosen the question has not the possibility to be postponed because the question requires a fast answer |
 
 #### Answer to question
 
