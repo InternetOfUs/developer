@@ -23,6 +23,7 @@ Its attributes are:
 | `anonymous` | _boolean_ | Whether to ask the question anonymously or not, if anonymous is chosen then the name of the user will not be shown |
 | `socialCloseness` | _enum_ [`similar`, `indifferent`, `different`] | The kind of social closeness the user should have to receive the question |
 | `positionOfAnswerer` | _enum_ [`nearby`, `anywhere`] | How close the users should be to receive the question, if nearby is chosen the question has not the possibility to be postponed because the question requires a fast answer |
+| `maxUsers` | _integer_ | The maximum number of users to which propose the question and also in the case the user requests to ask to more users |
 
 ### Transaction
 
@@ -70,7 +71,7 @@ Its attributes are:
 | ------------- | ---- | ----------- |
 | `transactionId` | _string_ | The id of the picked answer transaction |
 | `reason` | _string_ | The reason why the specific answer was picked |
-| `helpful` | _enum_ [`1`, `2`, `3`, `4`, `5`] | How well the bot is good in connecting with users following intentions |
+| `helpful` | _enum_ [`notAtAllHelpful`, `slightlyHelpful`, `somewhatHelpful`, `veryHelpful`, `extremelyHelpful`] | How helpful is the bot in connecting with users following intentions |
 
 #### Ask some more users
 
