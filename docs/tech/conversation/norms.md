@@ -357,6 +357,14 @@ The next conditions are over the task associated with the norm engine.
   This condition is used to obtain the task transaction defined into the task associated with the norm engine.
     * ``Transaction``  _Output_  JSON model with the transaction
     * ``TransactionId``  _Input_  string identifier of the task transaction to obtain.
+- ``filter_transactions(Result,Test,Map)``
+  This condition is used to obtain a sub set of the transactions that has been done in the task
+  and map them to a new value. In other words, for each transaction of the current task if
+  ``call(Test,Transaction)`` is True, it transforms the transaction with ``call(Map,Value,Transaction)``
+  and it adds the obtained Value to the result list.  
+    * ``Result``  _Output_  anything the filtered and mapped task transactions.
+    * ``Test``  _Input_  predicate to call to known if the transaction is accepted. 
+    * ``Map``  _Input_  predicate to call to convert the accepted transaction.
 
   
 ### Social context builder conditions
@@ -425,7 +433,7 @@ These actions are done over the user that is associated with the norm engine, th
 - ``send_user_message(Label,Content)``
   This action posts a callback message to the user.
   If it is done over an active transaction it is stored in it and notify
-  the incentive server that the message is sent.
+  the incentive server and the social context builder that the message is sent.
     * ``Label`` _Input_  string with the message label.
     * ``Content`` _Input_  JSON model with the message content.
 - ``merge_user_state(State)``
@@ -520,10 +528,18 @@ These actions interact with the other components of the WeNet platform.
   This action notifies the incentive server that a message is sent to the user Count times in the community.
     * ``Label``  _Input_  string with the label of the sent message.
     * ``Count``  _Input_  integer the number of times the message is sent to the user on the community for the current task type.
-- ``notify_volunteers_to_social_context_builder(Volunteers,UserId)``
-  This action notifies the social context builder about the volunteers to do a task.
-    * ``Volunteers``  _Input_  array of strings with the user identifiers that has volunteer to do a task.
-    * ``UserId``  _Input_  string user identifier to be a volunteer.
+- ``volunteers_ranking(Ranking,Volunteers)``
+  This action calls the social context builder to obtain a ranking for some volunteers.
+    * ``Ranking``  _Output_  array of strings with the ranked volunteers.
+    * ``Volunteers``  _Input_  array of strings with the user identifiers that has volunteer.
+- ``answers_ranking(Ranking,UserAnswers)``
+  This action calls the social context builder to obtain a ranking for some answers.
+    * ``Ranking``  _Output_  array of strings with the ranked answers.
+    * ``UserAnswers``  _Input_  array of JSON models with the user answers. This array elements
+    can be created using the ``wenet_new_user_answer``.
+- ``notify_social_context_builder_message_sent(Message)``
+  This action notifies the social context builder that a message is sent to the user.
+    * ``Message``  _Input_  JSON model with the sent message.
  
 
 ## Other Useful Norms predicates
@@ -982,19 +998,31 @@ The next predicates are used to interact with the incentive server component.
   will produce ``URL = 'https://wenet.u-hopper.com/prod/incentive_server/Tasks/TaskStatus/'``.
     * ``Url``  _Output_  string of the API point to the incentive server.
     * ``Paths``  _Input_  array of values used to build the API point.
-- ``wenet_incentive_server_update_task_status(Updated,Status)``
-  This predicate is used to update the task status.
+- ``wenet_incentive_server_update_task_transaction_status(Updated,Status)``
+  This predicate is used to update the transaction status.
     * ``Updated``  _Output_  JSON model with the updated status.
-    * ``Status``  _Input_  JSON model with the task status to update.
-- ``wenet_new_task_status(Status,AppId,UserId,CommunityId,TaskId,Action,Message)``
-  This predicate is used to create the task status.
+    * ``Status``  _Input_  JSON model with the transaction status to update.
+- ``wenet_incentive_server_update_task_transaction_status(Status,UserId,CommunityId,AppId,TaskTypeId,Label,Count)``
+  This predicate is used to create the transaction status.
     * ``Status``  _Output_  JSON model with the status.
-    * ``AppId``  _Input_  string with the application identifier of the status.
     * ``UserId``  _Input_  string with the user identifier of the status.
     * ``CommunityId``  _Input_  string with the community identifier of the status.
-    * ``TaskId``  _Input_  string with the task identifier of the status.
-    * ``Action``  _Input_  string with the action of the status.
-    * ``Message``  _Input_  string with the message of the status.
+    * ``AppId``  _Input_  string with the application identifier of the status.
+    * ``TaskTypeId``  _Input_  string with the task type identifier of the status.
+    * ``Label``  _Input_  string with the label of the done transaction.
+    * ``Count``  _Input_  integer with the times the transaction is done by the user, for the task type in the community.
+- ``wenet_incentive_server_update_task_type_status(Updated,Status)``
+  This predicate is used to update the task type status.
+    * ``Updated``  _Output_  JSON model with the updated status.
+    * ``Status``  _Input_  JSON model with the transaction status to update.
+- ``wenet_new_task_type_status(Status,UserId,CommunityId,AppId,TaskTypeId,Count)``
+  This predicate is used to create the task type status.
+    * ``Status``  _Output_  JSON model with the status.
+    * ``UserId``  _Input_  string with the user identifier of the status.
+    * ``CommunityId``  _Input_  string with the community identifier of the status.
+    * ``AppId``  _Input_  string with the application identifier of the status.
+    * ``TaskTypeId``  _Input_  string with the task type identifier of the status.
+    * ``Count``  _Input_  integer with the times a task for the task type is created by the user in the community.
 
 
 ### Social context builder
@@ -1009,8 +1037,9 @@ The next predicates are used to interact with the social context builder compone
   will produce ``URL = 'https://wenet.u-hopper.com/prod/social_context_builder/social/explanations/2/1'``.
     * ``Url``  _Output_  string of the API point to the social context builder.
     * ``Paths``  _Input_  array of values used to build the API point.
-- ``wenet_social_context_builder_update_preferences(UserId,TaskId,Users)``
-  This predicate is used to update the preferences of a user.
+- ``wenet_social_context_builder_post_preferences(Ranking,UserId,TaskId,Users)``
+  Post the preferences of an user. This is used to calculate the ranking of the volunteers.
+    * ``Ranking``  _Output_  array of string with the rabked user identifier.
     * ``UserId``  _Input_  string with the user identifier.
     * ``TaskId``  _Input_  string with the task identifier.
     * ``Users``  _Input_  array of string with the identifiers of the preferred users.
@@ -1027,6 +1056,36 @@ The next predicates are used to interact with the social context builder compone
   This predicate is used to get the summary of the social explanation.
     * ``Summary``  _Output_  string with the summary of the explanation.
     * ``SocialExplanation``  _Input_  JSON model with the social explanation.
+- ``wenet_social_context_builder_post_preferences_answers(Ranking,UserId,TaskId,UserAnswers)``
+  Post the preferences answers of an user. This is used to calculate the ranking of the answers.
+    * ``Ranking``  _Output_  array of string with the rabked user identifier.
+    * ``UserId``  _Input_  string with the user identifier.
+    * ``TaskId``  _Input_  string with the task identifier.
+    * ``UserAnswers``  _Input_  array of Json models sith the user and answers to rank.
+- ``wenet_user_id_of_user_answer(UserId, UserAnswer)``
+  This predicate is used to get the user identifier of a user answer.
+    * ``UserId``  _Output_  string with the user identifier.
+    * ``UserAnswer``  _Input_  JSON model with the user answer.
+- ``wenet_answer_of_user_answer(Answer, UserAnswer)``
+  This predicate is used to get the answer of a user answer.
+    * ``Answer``  _Output_  string with the answer.
+    * ``UserAnswer``  _Input_  JSON model with the user answer.
+- ``wenet_new_user_answer(UserAnswer, UserId, Answer)``
+  This predicate is used to create a new user answer.
+    * ``UserAnswer``  _Output_  JSON model with the user answer.
+    * ``UserId``  _Input_  string model with the user identifier.
+    * ``Answer``  _Input_  string with the answer.
+- ``wenet_social_context_builder_post_social_notification(Message)``
+  This predicate is used to notify the social context builder about an interaction between users.
+    * ``Message``  _Input_  JSON model with the interaction message between users.
+- ``wenet_new_user_answer(UserAnswer, UserId, Answer)``
+  This predicate is used to create a user message that can be used to notify about the interaction between users.
+    * ``UserMessage``  _Output_  JSON model with the interaction message between the users.
+    * ``TaskId``  _Input_  string with the identifier of the task where the interaciton is done.
+    * ``TransactionId``  _Input_  string with the identifier of the task transaction.
+    * ``Timestamp``  _Input_  number with the UTC epoch timestamp when the interaction is done.
+    * ``SenderId``  _Input_  string with the identifier of the user that started the interaction.
+    * ``Message``  _Input_  JSON model with the message that is sent to the user.
 
     
 ### Personal context builder
@@ -1100,6 +1159,7 @@ The next predicates are used to interact with the personal context builder compo
     * ``Min``  _Input_  number with the minimum distance in meters to the source location. The distance is inclusive.
     * ``Max``  _Input_  number with the maximum distance in meters to the source location. The distance is inclusive.
     
+
 ## Deprecated predicates
 
 The  predicates of this section are only for backward compatibility, but you should avoid
@@ -1113,13 +1173,11 @@ to use them.
   This function is no more available on the incentive server API. So nothings do.
     * ``Action``  _Input_  string with the action that has changed the task.
     * ``Message``  _Input_  string that explains the change. 
-
 - ``wenet_incentive_server_update_task_status(Updated,Status)``
   This predicate is used to update the task status.
   This function is no more available on the incentive server API. So nothings do.
     * ``Updated``  _Output_  JSON model with the updated status.
     * ``Status``  _Input_  JSON model with the task status to update.
-    
 - ``wenet_new_task_status(Status,AppId,UserId,CommunityId,TaskId,Action,Message)``
   This predicate is used to create the task status.
   This data model is no more used.
@@ -1130,4 +1188,12 @@ to use them.
     * ``TaskId``  _Input_  string with the task identifier of the status.
     * ``Action``  _Input_  string with the action of the status.
     * ``Message``  _Input_  string with the message of the status.
-
+- ``wenet_social_context_builder_update_preferences(UserId,TaskId,Users)``
+  This predicate is deprecated use wenet_social_context_builder_post_preferences instead.
+    * ``UserId``  _Input_  string with the user identifier.
+    * ``TaskId``  _Input_  string with the task identifier.
+    * ``Users``  _Input_  array of string with the identifiers of the preferred users.
+- ``notify_volunteers_to_social_context_builder(Volunteers,UserId)``
+  This predicate is deprecated use volunteers_ranking instead.
+    * ``Volunteers``  _Input_  array of strings with the user identifiers that has volunteer to do a task.
+    * ``UserId``  _Input_  string user identifier to be a volunteer.
