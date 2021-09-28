@@ -537,6 +537,9 @@ These actions interact with the other components of the WeNet platform.
     * ``Ranking``  _Output_  array of strings with the ranked answers.
     * ``UserAnswers``  _Input_  array of JSON models with the user answers. This array elements
     can be created using the ``wenet_new_user_answer``.
+- ``selected_answer_from_last_ranking(UserAnswer)``
+  This action notify the social context builder the selected answers of the last answer ranking result.
+    * ``UserAnswers``  _Input_  JSON models with the selected user answer.
 - ``notify_social_context_builder_message_sent(Message)``
   This action notifies the social context builder that a message is sent to the user.
     * ``Message``  _Input_  JSON model with the sent message.
@@ -786,16 +789,23 @@ The next predicates are used to interact with the task manager component.
   This predicate obtains the attributes of a transaction.
     * ``Attributes``  _Output_  JSON model with the transaction attributes.
     * ``Transaction``  _Input_  JSON model of the transaction to obtain the attributes.
-- ``wenet_actioneer_id_of_transaction(ActioneerId,, Transaction)``
+- ``wenet_actioneer_id_of_transaction(ActioneerId, Transaction)``
   This predicate obtains the user that does a transaction.
     * ``ActioneerId``  _Output_  string with the transaction actioneer. Thus, the identifier
     of the user that has done the transaction.
     * ``Transaction``  _Input_  JSON model of the transaction to obtain the identifier.
+- ``wenet_creation_ts_of_transaction(CreationTs, Transaction)``
+  This predicate obtains the creation timestamp of a transaction.
+    * ``CreationTs``  _Output_  integer with the transaction creation timestamp.
+    * ``Transaction``  _Input_  JSON model of the transaction to obtain the timestamp.
+- ``wenet_last_update_ts_of_transaction(LastUpdateTs, Transaction)``
+  This predicate obtains the last update timestamp of a transaction.
+    * ``LastUpdateTs``  _Output_  onteger with the transaction last update timestamp.
+    * ``Transaction``  _Input_  JSON model of the transaction to obtain the timestamp.
 - ``wenet_messages_of_transaction(Messages, Transaction)``
   This predicate obtains the messages of a transaction.
     * ``Messages``  _Output_  array of JSON models with the transaction messages.
     * ``Transaction``  _Input_  JSON model of the transaction to obtain the messages.
-
 
 
 ### Interaction protocol engine
@@ -928,6 +938,24 @@ The next predicates are used to interact with the interaction protocol engine co
     * ``Delay``  _Input_  number with the seconds to wait before sending the event.
     * ``Particle``  _Input_  string with the particle for the event.
     * ``Content``  _Input_  JSON model with the content for the event.
+- ``wenet_new_interaction(Interaction,AppId,CommunityId,TaskTypeId,TaskId,SenderId,ReceiverId,TransactionLabel,TransactionAttributes,TransactionTs,MessageLabel,MessageAttributes,MessageTs)``
+  This predicate is used to create a new interaction.
+    * ``Interaction``  _Output_  JSON model with the created interaction.
+    * ``AppId``  _Input_  string with the application identifier for the interaction.
+    * ``CommunityId``  _Input_  string with the community identifier for the interaction.
+    * ``TaskTypeId``  _Input_  string with the task type identifier for the interaction.
+    * ``TaskId``  _Input_  string with the task identifier for the interaction.
+    * ``SenderId``  _Input_  string with the identifier of the user that starts the interaction.
+    * ``ReceiverId``  _Input_  string withthe identifier of the user that ends the interaction.
+    * ``TransactionLabel``  _Input_  string with the label of the transaction that has started the interaction.
+    * ``TransactionAttributes``  _Input_  JSON with the attributes of the transaction that has started the interaction.
+    * ``TransactionTs``  _Input_  integer with the UTC epoch timestamp representing the time when the transaction has been done.
+    * ``MessageLabel``  _Input_  string with the label of the message that has started the interaction.
+    * ``MessageAttributes``  _Input_  JSON with the attributes of the message that has started the interaction.
+    * ``MessageTs``  _Input_  integer with the UTC epoch timestamp representing the time when the message has been done.
+- ``wenet_interaction_protocol_engine_add_interaction(Interaction)``
+  This predicate is used to add a new interaction.
+    * ``Interaction``  _Input_  JSON model with the interaction to add.
 
 
 ### Service
@@ -1058,10 +1086,16 @@ The next predicates are used to interact with the social context builder compone
     * ``SocialExplanation``  _Input_  JSON model with the social explanation.
 - ``wenet_social_context_builder_post_preferences_answers(Ranking,UserId,TaskId,UserAnswers)``
   Post the preferences answers of an user. This is used to calculate the ranking of the answers.
-    * ``Ranking``  _Output_  array of string with the rabked user identifier.
+    * ``Ranking``  _Output_  array of JSON models with the ranked user answers.
     * ``UserId``  _Input_  string with the user identifier.
     * ``TaskId``  _Input_  string with the task identifier.
     * ``UserAnswers``  _Input_  array of Json models sith the user and answers to rank.
+- ``wenet_social_context_builder_put_preferences_answers_update(UserId,TaskId,Selected,Ranking)``
+  This predicate is used to create a user message that can be used to notify about the interaction between users.
+    * ``UserId``  _Input_  string with the user that has selected teh answer.
+    * ``TaskId``  _Input_  string with the identifier of the task where the answer is selected.
+    * ``Selected``  _Input_  integer with the index of the selected answer of the ranking. It starts with 0.
+    * ``Ranking``  _Input_  array of JSON models with the ranked user answers where is the selected one.
 - ``wenet_user_id_of_user_answer(UserId, UserAnswer)``
   This predicate is used to get the user identifier of a user answer.
     * ``UserId``  _Output_  string with the user identifier.
@@ -1078,7 +1112,7 @@ The next predicates are used to interact with the social context builder compone
 - ``wenet_social_context_builder_post_social_notification(Message)``
   This predicate is used to notify the social context builder about an interaction between users.
     * ``Message``  _Input_  JSON model with the interaction message between users.
-- ``wenet_new_user_answer(UserAnswer, UserId, Answer)``
+- ``wenet_new_user_message(UserAnswer, UserId, Answer)``
   This predicate is used to create a user message that can be used to notify about the interaction between users.
     * ``UserMessage``  _Output_  JSON model with the interaction message between the users.
     * ``TaskId``  _Input_  string with the identifier of the task where the interaciton is done.
