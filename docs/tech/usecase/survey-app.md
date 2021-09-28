@@ -58,6 +58,10 @@ It's necessary to put the *Question and Answer* codes in the field, because wene
 * Missing **A04, A05, Q06** fields tbd :warning:
 * Click *Publish* button on top of the page to save the survey.
 
+Once the survey is saved, the Tally form ID should be shared with the developers.
+The survey ID is a six-character ID and it can be found in *Share* column.
+![Alt text](figures/tally_id.png "Tally form")
+
 **2. Add required permissions on wenet developer hub**
 
 * Enable the wenet user profile permissions on [wenet hub -> developers -> survey app](https://wenet.u-hopper.com/dev/hub/frontend/developer/index)
