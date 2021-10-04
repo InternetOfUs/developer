@@ -55,7 +55,6 @@ It's necessary to put the *Question and Answer* codes in the field, because wene
     Complete the logic and hidden fields for all given languages.
     ![Alt text](figures/tally4.png "Tally form")
     ![Alt text](figures/tally6.png "Tally form")
-* Missing **A04, A05, Q06** fields tbd :warning:
 * Click *Publish* button on top of the page to save the survey.
 
 Once the survey is saved, the Tally form ID should be shared with the developers.
