@@ -9,11 +9,13 @@ sidebar_label: Survey Application
 
 The following steps are required for creating a survey 
 
-**1. Creating and configuring a survey form on Tally**
- 
+
+### Creating and configuring a survey form on Tally
+
+**1. Creating a workspace on Tally**
+
 ![Alt text](figures/tally1.png "Tally form")
 
-### Creating a workspace on Tally
 * Go to [Tally](https://tally.so) and create your workspace
 * Click *create workspace* on the left side of the page
 * Assign a name
@@ -22,6 +24,13 @@ The following steps are required for creating a survey
 * Click on *Edit* button on top right to start adding surveys
 
 ![Alt text](figures/tally2.png "Tally form")
+
+**2. Using a survey template from Tally**
+
+* Login to your Tally page
+* Access the following [link](https://tally.so/templates/wenet-survey-app/rm67P3)
+* Click on the *Use this template* button on the top right corner and edit the questions/answers 
+![Alt text](figures/tally_template.png "Tally form")
 
 ### Editing a workspace on Tally
 
@@ -40,12 +49,12 @@ It's necessary to put the *Question and Answer* codes in the field, because wene
     * Dropdown menu
     * Rating
     * Linear scale
-* To create question **A02**: use *Question + Date* field
-* To create questions **A03, A11**: use *Question + Dropdown* field
-* To create **Q09, C02, G02, G05, G07, B01, B02**: use *Question + Linear scale* field
-* To create **A07**: use *Question + Number* field 
-* To create **A01, A11, C01, C04, C07, D03, D04, G01, G17**: use *Question + Multiple choice* field.
-* To create language field **Q07**:
+* To create date type questions: use *Question + Date* field
+* To create single choice from dropdown questions : use *Question + Dropdown* field
+* To create questions with answers selectable from multiple numbers: use *Question + Linear scale* field
+* To create questions: use *Question + Number* field 
+* To create questions with multiple selectable answers: use *Question + Multiple choice* field.
+* To create a question with answer range is hidden while unselected: For example, language field
     * First, create Question + Checkboxes field, with a code Q07: included in the question field
     * Add language options including the [language and its proficiency codes](https://docs.google.com/spreadsheets/d/1SyTqCyAmXLVuIPa2CqOf4z7n8B1Qsv5O/edit#gid=1590011795)
     * Add *Question + Dropdown* field for every language input and it's level of proficiency (with their code) and make it *hidden*.
@@ -61,7 +70,37 @@ Once the survey is saved, the Tally form ID should be shared with the developers
 The survey ID is a six-character ID and it can be found in *Share* column.
 ![Alt text](figures/tally_id.png "Tally form")
 
-**2. Add required permissions on wenet developer hub**
+
+
+### Add required permissions on wenet developer hub
 
 * Enable the wenet user profile permissions on [wenet hub -> developers -> survey app](https://wenet.u-hopper.com/dev/hub/frontend/developer/index)
 ![Alt text](figures/wenet1.png "wenet permissions")
+
+
+### List of questions and answers
+* Full list of *Questions and answers* codes can be found in [this spreadsheet](https://docs.google.com/spreadsheets/d/1SyTqCyAmXLVuIPa2CqOf4z7n8B1Qsv5O/edit#gid=1590011795)
+* List of APIs related with the user profile can be found [here](https://swagger.u-hopper.com/?url=https://bitbucket.org/wenet/wenet-components-documentation/raw/master/sources/wenet-profile_manager-openapi.yaml)
+
+* List of *Questions, answers and fields* used in Pilot are shown below
+
+| Question Code |               Answers               | Competences Meanings Materials | Ontology Category Classification |   Variable Name   |
+|:-------------:|:-----------------------------------:|:------------------------------:|:--------------------------------:|:-----------------:|
+|      Q01      |                 list                |              None              |               None               |       *gender*      |
+|      Q02      |                number               |              None              |               None               |   *date_of_birth*   |
+|      Q03      |                 list                |            Materials           |         *university_status*        |     *department*    |
+|      Q04      |                 list                |            Materials           |         *university_status*        |  *degree_programme* |
+|      Q05      |                 list                |            Materials           |         *university_status*        |   *accommodation*   |
+|     Q08a-r    |              number 1-5             |           Competences          |             *interest*             |    see column [G](https://docs.google.com/spreadsheets/d/1SyTqCyAmXLVuIPa2CqOf4z7n8B1Qsv5O/edit#gid=1590011795)   |
+|     Q08a-r    |              number 1-5             |           Competences          |        *university_activity*       |    see column [G](https://docs.google.com/spreadsheets/d/1SyTqCyAmXLVuIPa2CqOf4z7n8B1Qsv5O/edit#gid=1590011795)   |
+|     Q08a-r    | number 1-5 calculated to 0-1 values |            Meanings            |        *guiding_principles*        |     *excitement*    |
+|     Q08a-r    | number 1-5 calculated to 0-1 values |            Meanings            |        *guiding_principles*        |     *promotion*     |
+|     Q08a-r    | number 1-5 calculated to 0-1 values |            Meanings            |        *guiding_principles*        |     *existence*     |
+|     Q08a-r    | number 1-5 calculated to 0-1 values |            Meanings            |        *guiding_principles*        |   *suprapersonal*   |
+|     Q08a-r    | number 1-5 calculated to 0-1 values |            Meanings            |        *guiding_principles*        |    *interactive*    |
+|     Q08a-r    | number 1-5 calculated to 0-1 values |            Meanings            |        *guiding_principles*        |     *normative*     |
+|     Q09a-t    | number 1-5 calculated to 0-1 values |            Meanings            |             *big_five*             |    *extraversion*   |
+|     Q09a-t    | number 1-5 calculated to 0-1 values |            Meanings            |             *big_five*             |   *agreeableness*   |
+|     Q09a-t    | number 1-5 calculated to 0-1 values |            Meanings            |             *big_five*             | *conscientiousness* |
+|     Q09a-t    | number 1-5 calculated to 0-1 values |            Meanings            |             *big_five*             |    *neuroticism*    |
+|     Q09a-t    | number 1-5 calculated to 0-1 values |            Meanings            |             *big_five*             |      *openness*     |
