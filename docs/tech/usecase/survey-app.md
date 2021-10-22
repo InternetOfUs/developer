@@ -10,9 +10,7 @@ sidebar_label: Survey Application
 The following steps are required for creating a survey 
 
 
-### Creating and configuring a survey form on Tally
-
-**1. Creating a workspace on Tally**
+### Creating a survey form on Tally
 
 ![Alt text](figures/tally1.png "Tally form")
 
@@ -25,7 +23,7 @@ The following steps are required for creating a survey
 
 ![Alt text](figures/tally2.png "Tally form")
 
-**2. Using a survey template from Tally**
+### Using a survey template on Tally
 
 * Login to your Tally page
 * Access the following [link](https://tally.so/templates/wenet-survey-app/rm67P3)
@@ -72,7 +70,7 @@ The survey ID is a six-character ID and it can be found in *Share* column.
 
 
 
-### Add required permissions on wenet developer hub
+### Adding required permissions on wenet developer hub
 
 * Enable the wenet user profile permissions on [wenet hub -> developers -> survey app](https://wenet.u-hopper.com/dev/hub/frontend/developer/index)
 ![Alt text](figures/wenet1.png "wenet permissions")
@@ -82,7 +80,8 @@ The survey ID is a six-character ID and it can be found in *Share* column.
 * Full list of *Questions and answers* codes can be found in [this spreadsheet](https://docs.google.com/spreadsheets/d/1SyTqCyAmXLVuIPa2CqOf4z7n8B1Qsv5O/edit#gid=1590011795)
 * List of APIs related with the user profile can be found [here](https://swagger.u-hopper.com/?url=https://bitbucket.org/wenet/wenet-components-documentation/raw/master/sources/wenet-profile_manager-openapi.yaml)
 
-* List of *Questions, answers and fields* used in Pilot are shown below
+* List of *Questions, answers and fields* and their assigned profile entries used in Pre-Pilot are shown below
+
 
 | Question Code |               Answers               | Competences Meanings Materials | Ontology Category Classification |   Variable Name   |
 |:-------------:|:-----------------------------------:|:------------------------------:|:--------------------------------:|:-----------------:|
