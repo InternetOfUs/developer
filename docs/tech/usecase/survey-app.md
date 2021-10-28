@@ -83,23 +83,23 @@ The survey ID is a six-character ID and it can be found in *Share* column.
 * List of *Questions, answers and fields* and their assigned profile entries used in Pre-Pilot are shown below
 
 
-| Question Code |               Answers               | Competences Meanings Materials | Ontology Category Classification |   Variable Name   |
-|:-------------:|:-----------------------------------:|:------------------------------:|:--------------------------------:|:-----------------:|
-|      Q01      |                 list                |              None              |               None               |       *gender*      |
-|      Q02      |                number               |              None              |               None               |   *date_of_birth*   |
-|      Q03      |                 list                |            Materials           |         *university_status*        |     *department*    |
-|      Q04      |                 list                |            Materials           |         *university_status*        |  *degree_programme* |
-|      Q05      |                 list                |            Materials           |         *university_status*        |   *accommodation*   |
-|     Q08a-r    |              number 1-5             |           Competences          |             *interest*             |    see column [G](https://docs.google.com/spreadsheets/d/1SyTqCyAmXLVuIPa2CqOf4z7n8B1Qsv5O/edit#gid=1590011795)   |
-|     Q08a-r    |              number 1-5             |           Competences          |        *university_activity*       |    see column [G](https://docs.google.com/spreadsheets/d/1SyTqCyAmXLVuIPa2CqOf4z7n8B1Qsv5O/edit#gid=1590011795)   |
-|     Q08a-r    | number 1-5 calculated to 0-1 values |            Meanings            |        *guiding_principles*        |     *excitement*    |
-|     Q08a-r    | number 1-5 calculated to 0-1 values |            Meanings            |        *guiding_principles*        |     *promotion*     |
-|     Q08a-r    | number 1-5 calculated to 0-1 values |            Meanings            |        *guiding_principles*        |     *existence*     |
-|     Q08a-r    | number 1-5 calculated to 0-1 values |            Meanings            |        *guiding_principles*        |   *suprapersonal*   |
-|     Q08a-r    | number 1-5 calculated to 0-1 values |            Meanings            |        *guiding_principles*        |    *interactive*    |
-|     Q08a-r    | number 1-5 calculated to 0-1 values |            Meanings            |        *guiding_principles*        |     *normative*     |
-|     Q09a-t    | number 1-5 calculated to 0-1 values |            Meanings            |             *big_five*             |    *extraversion*   |
-|     Q09a-t    | number 1-5 calculated to 0-1 values |            Meanings            |             *big_five*             |   *agreeableness*   |
-|     Q09a-t    | number 1-5 calculated to 0-1 values |            Meanings            |             *big_five*             | *conscientiousness* |
-|     Q09a-t    | number 1-5 calculated to 0-1 values |            Meanings            |             *big_five*             |    *neuroticism*    |
-|     Q09a-t    | number 1-5 calculated to 0-1 values |            Meanings            |             *big_five*             |      *openness*     |
+| Question Code |               Answers               | Competences Meanings Materials | Ontology Category Classification |                                                 Variable Name                                                |
+|:-------------:|:-----------------------------------:|:------------------------------:|:--------------------------------:|:------------------------------------------------------------------------------------------------------------:|
+|      Q01      |                 list                |              None              |               None               |                                                   *gender*                                                   |
+|      Q02      |                number               |              None              |               None               |                                                *date_of_birth*                                               |
+|      Q03      |                 list                |            Materials           |        *university_status*       |                                                 *department*                                                 |
+|      Q04      |                 list                |            Materials           |        *university_status*       |                                              *degree_programme*                                              |
+|      Q05      |                 list                |            Materials           |        *university_status*       |                                                *accommodation*                                               |
+|     Q06a-0    |   number 1-5 mapped to 0-1 values   |           Competences          |            *interest*            | see column [G](https://docs.google.com/spreadsheets/d/1SyTqCyAmXLVuIPa2CqOf4z7n8B1Qsv5O/edit#gid=1590011795) |
+|     Q07a-h    |   number 1-5 mapped to 0-1 values   |           Competences          |       *university_activity*      | see column [G](https://docs.google.com/spreadsheets/d/1SyTqCyAmXLVuIPa2CqOf4z7n8B1Qsv5O/edit#gid=1590011795) |
+|     Q08a-r    | number 1-5 calculated to 0-1 values |            Meanings            |       *guiding_principles*       |                                                 *excitement*                                                 |
+|     Q08a-r    | number 1-5 calculated to 0-1 values |            Meanings            |       *guiding_principles*       |                                                  *promotion*                                                 |
+|     Q08a-r    | number 1-5 calculated to 0-1 values |            Meanings            |       *guiding_principles*       |                                                  *existence*                                                 |
+|     Q08a-r    | number 1-5 calculated to 0-1 values |            Meanings            |       *guiding_principles*       |                                                *suprapersonal*                                               |
+|     Q08a-r    | number 1-5 calculated to 0-1 values |            Meanings            |       *guiding_principles*       |                                                 *interactive*                                                |
+|     Q08a-r    | number 1-5 calculated to 0-1 values |            Meanings            |       *guiding_principles*       |                                                  *normative*                                                 |
+|     Q09a-t    | number 1-5 calculated to 0-1 values |            Meanings            |            *big_five*            |                                                *extraversion*                                                |
+|     Q09a-t    | number 1-5 calculated to 0-1 values |            Meanings            |            *big_five*            |                                                *agreeableness*                                               |
+|     Q09a-t    | number 1-5 calculated to 0-1 values |            Meanings            |            *big_five*            |                                              *conscientiousness*                                             |
+|     Q09a-t    | number 1-5 calculated to 0-1 values |            Meanings            |            *big_five*            |                                                 *neuroticism*                                                |
+|     Q09a-t    | number 1-5 calculated to 0-1 values |            Meanings            |            *big_five*            |                                                  *openness*                                                  |
