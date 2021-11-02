@@ -26,10 +26,20 @@ The following steps are required for creating a survey
 ### Using a survey template on Tally
 
 * Login to your Tally page
-* Access the following [link](https://tally.so/templates/wenet-survey-app/rm67P3)
+* Access the following [link](https://tally.so/templates/wenet-survey-app/63xdy3)
 * Click on the *Use this template* button on the top right corner and edit the questions/answers 
 ![Alt text](figures/tally_template.png "Tally form")
+* Click *Publish* button on top of the page to save the survey after the edit
 
+---
+**NOTE**
+
+Pay attention to the logic and hidden field triggers and selections. Make sure the logic stays the same after changing the answer texts.
+![Alt text](figures/tally_template2.png "Tally form")
+
+---
+
+<!-- 
 ### Editing a workspace on Tally
 
 * Create a hidden text field written with _wenetId_ inside. This will help the survey app which user is currently logged in to the survey. If this field doesn't exist, survey will not work.
@@ -62,7 +72,8 @@ It's necessary to put the *Question and Answer* codes in the field, because wene
     Complete the logic and hidden fields for all given languages.
     ![Alt text](figures/tally4.png "Tally form")
     ![Alt text](figures/tally6.png "Tally form")
-* Click *Publish* button on top of the page to save the survey.
+* Click *Publish* button on top of the page to save the survey. 
+-->
 
 Once the survey is saved, the Tally form ID should be shared with the developers.
 The survey ID is a six-character ID and it can be found in *Share* column.
