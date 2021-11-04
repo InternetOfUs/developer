@@ -13,7 +13,8 @@ module.exports = {
         label: 'Use cases',
         items: [
             'tech/usecase/ask-for-help',
-            'tech/usecase/ask-for-helpv2'
+            'tech/usecase/ask-for-helpv2',
+            'tech/usecase/survey-app'
         ],
     },
   ],
