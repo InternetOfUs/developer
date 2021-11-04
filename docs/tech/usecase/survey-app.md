@@ -26,7 +26,7 @@ The following steps are required for creating a survey
 ### Using a survey template on Tally
 
 * Login to your Tally page
-* Access the following [link](https://tally.so/templates/wenet-survey-app/63xdy3)
+* Access the following [link](https://tally.so/templates/wenet-survey-app/l3jBE3)
 * Click on the *Use this template* button on the top right corner and edit the questions/answers 
 ![Alt text](figures/tally_template.png "Tally form")
 * Click *Publish* button on top of the page to save the survey after the edit
