@@ -18,10 +18,9 @@ The following steps are required for creating a survey
 * Click *create workspace* on the left side of the page
 * Assign a name
 * Click on *Integrations* column to add webhook endpoint
-* Webhook endpoint should be filled as https://survey.wenet.u-hopper.com/survey/event/
+* Webhook endpoint should be filled as https://survey.internetofus.u-hopper.com/survey/event/
 * Click on *Edit* button on top right to start adding surveys
 
-![Alt text](figures/tally2.png "Tally form")
 
 ### Using a survey template on Tally
 
