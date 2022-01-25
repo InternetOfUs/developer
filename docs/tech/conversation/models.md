@@ -5,9 +5,40 @@ sidebar_label: Models
 
 Conversations are possible thanks to 3 different models:
 
-1. task
-2. transaction
-3. message
+1. task type
+2. norm
+3. task
+4. transaction
+5. message
+
+## Task type
+
+
+The task type defines what the users can do in a task.
+
+| Parameter | Type | Description | Read only |
+| ------------- | ---- | ----------- | -----: |
+| `id` | _string_ | The unique identifier of the task type | `true` |
+| `name` | _string_ \| _null_ | The name of the task type | `false` |
+| `description` | _string_ \| _null_ | The description of the task type | `false` |
+| `keywords` | _string array \| _null_ | keywords to define the task type | `false` |
+| `attributes` | _object_ \| _null_ | It is a JSON object where the fields are the possible attributes of the task, and the value is the name is the OpenAPI description of the possible values for the attribute. | `false` |
+| `transactions` | _object_ \| _null_ | It is a JSON object where the fields are the possible labels of the transactions that the users can do on the task, and the value is the OpenAPI description of the attributes for the transaction | `false` |
+| `callbacks` | _object_ \| _null_ | It is a JSON object where the fields are the possible labels of the messages that the norms can send to the application for a user, and the value is the OpenAPI description of the attributes for the message | `false` |
+| `norms` | _object array_ \| _null_ | that describe the possible behaviour can do in a task of this type. If you want to read more about how to define norms read the [WeNet developer documentation](https://internetofus.github.io/developer/docs/tech/conversation/norms) | `false` |
+
+## Norm
+
+A norm is a set of conditions that if they are satisfied provokes that has to do a set of actions, and with this mechanism is controlled the interactions in the WeNet platform.
+If you want to read more about how to define norms read the [WeNet developer documentation](https://internetofus.github.io/developer/docs/tech/conversation/norms)
+
+| Parameter | Type | Description | Read only |
+| ------------- | ---- | ----------- | -----: |
+| `whenever` | _string_  | The conditions that active the norm | `false` |
+| `thenceforth` | _string_ | The actions to do when the conditions are satisfied | `false` |
+| `ontology` | _string_ \| _null_ | The extra code that is used on the conditions or the actions | `false` |
+| `description` | _string_ \| _null_ | The description of the norm | `false` |
+
 
 ## Task
 

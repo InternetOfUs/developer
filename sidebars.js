@@ -4,8 +4,9 @@ module.exports = {
         type: 'category',
         label: 'Conversation',
         items: [
-            'tech/conversation/models',
-            'tech/conversation/norms'
+            'tech/conversation/app-logic',
+            'tech/conversation/norms',
+            'tech/conversation/models'
         ],
     },
     {
