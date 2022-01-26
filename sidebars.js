@@ -17,17 +17,20 @@ module.exports = {
             'tech/usecase/ask-for-helpv2',
             'tech/usecase/survey-app'
         ],
-    },
+    }
   ],
   pilot: [
     'platform/intro',
     'platform/hub',
+    'platform/profile-manager',
+    'platform/task-manager',
+    'platform/interaction-protocol-engine',
     {
         type: 'category',
         label: 'Pilots',
         items: [
             'platform/pilots/m26'
         ],
-    },
+    }
   ],
 };
