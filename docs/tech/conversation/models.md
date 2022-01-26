@@ -13,7 +13,6 @@ Conversations are possible thanks to 3 different models:
 
 ## Task type
 
-
 The task type defines what the users can do in a task.
 
 | Parameter | Type | Description | Read only |
@@ -25,12 +24,12 @@ The task type defines what the users can do in a task.
 | `attributes` | _object_ \| _null_ | It is a JSON object where the fields are the possible attributes of the task, and the value is the name is the OpenAPI description of the possible values for the attribute. | `false` |
 | `transactions` | _object_ \| _null_ | It is a JSON object where the fields are the possible labels of the transactions that the users can do on the task, and the value is the OpenAPI description of the attributes for the transaction | `false` |
 | `callbacks` | _object_ \| _null_ | It is a JSON object where the fields are the possible labels of the messages that the norms can send to the application for a user, and the value is the OpenAPI description of the attributes for the message | `false` |
-| `norms` | _object array_ \| _null_ | that describe the possible behaviour can do in a task of this type. If you want to read more about how to define norms read the [WeNet developer documentation](https://internetofus.github.io/developer/docs/tech/conversation/norms) | `false` |
+| `norms` | _object array_ \| _null_ | that describe the possible behaviour can do in a task of this type. If you want to read more about how to define norms read the [norms section on the developer documentation](https://internetofus.github.io/developer/docs/tech/conversation/norms) | `false` |
 
 ## Norm
 
 A norm is a set of conditions that if they are satisfied provokes that has to do a set of actions, and with this mechanism is controlled the interactions in the WeNet platform.
-If you want to read more about how to define norms read the [WeNet developer documentation](https://internetofus.github.io/developer/docs/tech/conversation/norms)
+If you want to read more about how to define norms read the [norm section on the developer documentation](https://internetofus.github.io/developer/docs/tech/conversation/norms)
 
 | Parameter | Type | Description | Read only |
 | ------------- | ---- | ----------- | -----: |
