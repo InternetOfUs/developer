@@ -369,12 +369,43 @@ The next conditions are over the task associated with the norm engine.
   
 ### Social context builder conditions
 
-The next conditions are over the application associated with the norm engine (**me**). 
+The next conditions are used to interact with the social context builder. 
   
 - ``get_social_explanation(Explanation,UserId)``
-  This condition obtains the explanation why a user has to be chosen to be a volunteer.
+  This condition obtains the explanation of why a user has to be chosen to be a volunteer.
     * ``Explanation``  _Output_  JSON model with the explanation provided by the social context builder.
     * ``UserId``  _Input_  string identifier of the user to obtain the explanation.
+- ``normalized_social_closeness(Socialness,Users)``
+  Calculate the socialness of the current users respects some others.
+    * ``Socialness``  _Output_  JSON model list with the userId and value on the range [0,1] with the social closeness.
+    * ``Users``  _Input_  string list with the identifiers of the users to calculate the social closeness respect the current user.
+
+
+### Personal context builder conditions
+
+The next conditions are used to interact with the personal context builder 
+  
+- ``normalized_closeness(Closeness,Users,MaxDistance)``
+  Calculate the closeness (in distance) of the current user to some others.
+    * ``Closeness``  _Output_  JSON model list with the userId and value on the range [0,1] with the close in distance to the user. Where 1 is at the same location and on the 0 is too far away.
+    * ``Users``  _Input_  string list with the identifiers of the users to calculate the closeness respect the current user.
+    * ``MaxDistance``  _Input_  number  the maximum distance that a user can be.
+
+
+### Diversity conditions
+
+The next conditions are used to manage the diversity of some users. 
+  
+- ``normalized_diversity(Diversity,Users,Attributes)``
+  Calculate the diversity of the current user over some other users.
+    * ``Diversity``  _Output_  JSON model list with the userId and value on the range [0,1] with the diversity of the user. Where 1 is the maximum diversity and 0 that the user is similar to.
+    * ``Users``  _Input_  string list with the identifiers of the users to calculate the diversity respect the current user.
+    * ``Attributes``  _Input_  string list  with the names of the attributes of the profile to calculate the diversity.
+- ``my_profile_attributes_similars_to(Attributes,Text,MinSimilarity)``
+  Obtain the attributes of my profile that has a similarity to a text equal or greater than the minimum.
+    * ``Attributes``  _Output_  string list  with the name of the profile attributes that are similar to the text.
+    * ``Text``  _Input_  string  to compare the profile attributes.
+    * ``MinSimilarity``  _Input_  number  a value in the range [0,1] that define the minimum similarity to take an attribute.
 
 
 ### Time conditions
@@ -501,14 +532,6 @@ These actions interact with the other components of the WeNet platform.
     * ``UserId``  _Input_  strings identifier of the user to receive the message.
     * ``Particle``  _Input_  string with the message particle.
     * ``Content``  _Input_  JSON model with the message content.
-- ``notify_incentive_server_task_created(TaskTypeId,Count)``
-  This action notifies the incentive server that a user has created a task of the specific task type.
-	* ``TaskTypeId``  _Input_  string with the identifier of the task type associated with the created task.
-    * ``Count``  _Input_  integer the number of times the user has created a task of the specific task type in the community.
-- ``notify_incentive_server_task_created(TaskTypeId)``
-  This action notifies the incentive server that a user has created a task of the specific task type.
-  The number of times the task is created is counted by the user, task type and community.
-	* ``TaskTypeId``  _Input_  string with the identifier of the task type associated with the created task.
 - ``notify_incentive_server_task_created()``
   This action notifies the incentive server that a user has created a task.
   The number of times the task is created is counted by the user, task type and community.
@@ -581,6 +604,55 @@ The next predicates refer to facts (constants) that have been set when the norm 
 - ``wenet_personal_context_builder_api_url(URL)``
   The fact with the URL to the personal context builder component.
     * ``URL``  _Output_  string with the personal context builder API URL.
+
+
+### User value models
+
+The next predicates are used to manipulate the JSON user-value models.
+
+- ``wenet_new_user_value(UserValue,UserId,Value)``
+  Create a new user value JSON model.
+    * ``UserValue``  _Output_  JSON  user-value model.
+    * ``UserId``  _Input_  string  identifier of the user.
+    * ``Value``  _Input_  number  on the range [0,1] with the vlaue associated to the user.
+- ``wenet_user_id_from_user_value(UserId,UserValue)``
+  Get the user identifier of the JSON user value model.
+    * ``UserId``  _Output_  string  with the user identifier defined on the model.
+    * ``UserValue``  _Input_  JSON  user-value model.
+- ``wenet_value_from_user_value(Value,UserValue)``
+  Get the value of the JSON user value model.
+    * ``Value``  _Output_  number  with the value defined on the model.
+    * ``UserValue``  _Input_  JSON  user-value model.
+- ``wenet_initialize_user_values(List,Users,Value)``
+  Create a list of user values for some users with the same value.
+    * ``List``  _Output_  JSON list  with the user-value models.
+    * ``Users``  _Input_  string list  with the user identfifiers to create the models.
+    * ``Value``  _Input_  number  on  the range [0,1] with the value to set for all the models.
+- ``wenet_negate_user_value(Target,Source)``
+  Apply for each model-value model the operation 1 - Value.
+    * ``Target``  _Output_  JSON list with the user-value models where each value is negated (1 - value).
+    * ``Source``  _Input_  JSON list  with the user-value models to negate their value.
+- ``wenet_user_values_to_value_user_id_pairs(Target,Source)``
+  Convert a list of JSON user values to a list of pairs. A pair is UserId-Value.
+    * ``Target``  _Output_  strig list with the pairs.
+    * ``Source``  _Input_  JSON list  with the user-value models to convert.
+- ``wenet_value_user_id_pairs_to_user_values(Target,Source)``
+  Convert a list of pairs to a list of JSON user values. A pair is UserId-Value.
+    * ``Target``  _Output_  JSON list with the user-value models.
+    * ``Source``  _Input_  string list  with the pairs  to convert.
+- ``wenet_sort_user_values_by_value(Target,Source)``
+  Sort a list user values.
+    * ``Target``  _Output_  JSON list that is sorted by the value.
+    * ``Source``  _Input_  JSON list of the user-value models to sort.
+- ``wenet_user_values_to_user_ids(Target,Source)``
+  Convert a list of user values to a list of user identifiers.
+    * ``Target``  _Output_  JSON list that is sorted by the value.
+    * ``Source``  _Input_  JSON list of the user-value models to sort.
+- ``wenet_product_user_values(Product,A,B)``
+  Do the product of the value of the same user in both lists. If a user is present on A and not preset on B the product is 0. If a user is present on B and not preset on A it is ignored.
+    * ``Product``  _Output_  JSON list  with the product of the value of the same user identifier.
+    * ``A``  _Input_  JSON list  with the user-value models to multiplicate.
+    * ``B``  _Input_  JSON list  with the user-value models to multiplicate.
 
 
 ### Logs messages
@@ -1066,7 +1138,7 @@ The next predicates are used to interact with the social context builder compone
     * ``Url``  _Output_  string of the API point to the social context builder.
     * ``Paths``  _Input_  array of values used to build the API point.
 - ``wenet_social_context_builder_post_preferences(Ranking,UserId,TaskId,Users)``
-  Post the preferences of an user. This is used to calculate the ranking of the volunteers.
+  Post the preferences of a user. This is used to calculate the ranking of the volunteers.
     * ``Ranking``  _Output_  array of string with the rabked user identifier.
     * ``UserId``  _Input_  string with the user identifier.
     * ``TaskId``  _Input_  string with the task identifier.
@@ -1085,7 +1157,7 @@ The next predicates are used to interact with the social context builder compone
     * ``Summary``  _Output_  string with the summary of the explanation.
     * ``SocialExplanation``  _Input_  JSON model with the social explanation.
 - ``wenet_social_context_builder_post_preferences_answers(Ranking,UserId,TaskId,UserAnswers)``
-  Post the preferences answers of an user. This is used to calculate the ranking of the answers.
+  Post the preferences answers of a user. This is used to calculate the ranking of the answers.
     * ``Ranking``  _Output_  array of JSON models with the ranked user answers.
     * ``UserId``  _Input_  string with the user identifier.
     * ``TaskId``  _Input_  string with the task identifier.

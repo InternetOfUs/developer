@@ -4,8 +4,9 @@ module.exports = {
         type: 'category',
         label: 'Conversation',
         items: [
-            'tech/conversation/models',
-            'tech/conversation/norms'
+            'tech/conversation/app-logic',
+            'tech/conversation/norms',
+            'tech/conversation/models'
         ],
     },
     {
@@ -16,17 +17,20 @@ module.exports = {
             'tech/usecase/ask-for-helpv2',
             'tech/usecase/survey-app'
         ],
-    },
+    }
   ],
   pilot: [
     'platform/intro',
     'platform/hub',
+    'platform/profile-manager',
+    'platform/task-manager',
+    'platform/interaction-protocol-engine',
     {
         type: 'category',
         label: 'Pilots',
         items: [
             'platform/pilots/m26'
         ],
-    },
+    }
   ],
 };
