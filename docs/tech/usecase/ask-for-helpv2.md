@@ -24,6 +24,142 @@ Its attributes are:
 | `positionOfAnswerer` | _enum_ [`nearby`, `anywhere`] | How close the users should be to receive the question, if nearby is chosen the question has not the possibility to be postponed because the question requires a fast answer |
 | `maxUsers` | _integer_ | The maximum number of users to which propose the question and also in the case the user requests to ask to more users |
 
+
+### Transaction
+
+The following transactions are supported:
+
+* answer to a question;
+* ignore a question;
+* report a question;
+* pick the best answer;
+* ask some more users;
+* report an answer.
+
+#### Answer to a question
+
+It is identified by the label `answerTransaction`.
+
+Its attributes are:
+
+| Attribute | Type | Description |
+| ------------- | ---- | ----------- |
+| `answer` | _string_ | The answer given by the user to the question |
+| `anonymous` | _boolean_ | Whether to answer the question anonymously or not, if anonymous is chosen then the name of the user will not be shown |
+
+#### Ignore a question
+
+It is identified by the label `notAnswerTransaction`.
+
+#### Report a question
+
+It is identified by the label `reportQuestionTransaction`.
+
+Its attributes are:
+
+| Attribute | Type | Description |
+| ------------- | ---- | ----------- |
+| `reason` | _enum_ [`abusive`, `spam`] | The reason why the question was reported |
+
+#### Pick the best answer
+
+It is identified by the label `bestAnswerTransaction`.
+
+Its attributes are:
+
+| Attribute | Type | Description |
+| ------------- | ---- | ----------- |
+| `transactionId` | _string_ | The id of the picked answer transaction |
+| `reason` | _string_ | The reason why the specific answer was picked |
+| `helpful` | _enum_ [`notAtAllHelpful`, `slightlyHelpful`, `somewhatHelpful`, `veryHelpful`, `extremelyHelpful`] | How helpful is the bot in connecting with users following intentions |
+
+#### Ask some more users
+
+It is identified by the label `moreAnswerTransaction`.
+
+#### Report an answer
+
+It is identified by the label `reportAnswerTransaction`.
+
+Its attributes are:
+
+| Attribute | Type | Description |
+| ------------- | ---- | ----------- |
+| `transactionId` | _string_ | The id of the answer transaction that was reported |
+| `reason` | _enum_ [`abusive`, `spam`] | The reason why the specific answer was reported |
+
+
+### Message
+
+The following messages are supported:
+
+* notify there is a new question to answer to;
+* notify there is a new answer to a question;
+* notify the provided answer has been marked as the preferred one.
+
+#### Question to answer
+
+It is identified by the label `QuestionToAnswerMessage`.
+
+Its attributes are:
+
+| Attribute | Type | Description |
+| ------------- | ---- | ----------- |
+| `taskId` | _string_ | The id of the task associated with the question |
+| `question` | _string_ | The question to answer to |
+| `userId` | _string_ | The id of the user who proposed the question |
+| `sensitive` | _boolean_ | Whether the question is sensitive or not, if it is sensitive the bot will let other people know to take extra care in answering the question |
+| `anonymous` | _boolean_ | Whether to ask the question anonymously or not, if anonymous is chosen then the name of the user will not be shown |
+| `positionOfAnswerer` | _enum_ [`nearby`, `anywhere`] | How close the users should be to receive the question, if nearby is chosen the question has not the possibility to be postponed because the question requires a fast answer |
+
+#### Answer to question
+
+It is identified by the label `AnsweredQuestionMessage`.
+
+Its attributes are:
+
+| Attribute | Type | Description |
+| ------------- | ---- | ----------- |
+| `taskId` | _string_ | The id of the task associated with the question |
+| `question` | _string_ | The question to answer to |
+| `transactionId` | _string_ | The id of the transaction associated to the answer |
+| `answer` | _string_ | The answer to the question |
+| `userId` | _string_ | The id of the user who answered the question |
+| `anonymous` | _boolean_ | Whether the user prefers to answer the question anonymously or not, if anonymous is chosen then the name of the user will not be shown |
+
+:::note
+If access to the complete list of answers is required, this can be done by accessing the updated details of a task.
+:::
+
+#### Answer picked
+
+It is identified by the label `AnsweredPickedMessage`.
+
+| Attribute | Type | Description |
+| ------------- | ---- | ----------- |
+| `taskId` | _string_ | The id of the task associated with the question |
+| `question` | _string_ | The question for which was picked the answer |
+| `transactionId` | _string_ | The id of the transaction associated to the answer |
+
+
+### Norm
+
+The following norms are supported:
+
+* when the task is created filter the possible users to ask about and ask them;
+* notify user if it can help with a question;
+* provide an answer to a question;
+* notify the questioner about the answer;
+* notify to the users about best answer;
+* notify the user that its answer is picked;
+* ask more users;
+* nothing to do with some transactions only store them.
+
+
+## SetUp Configuration
+
+### Task
+
 The app logic defined in the hub contains in the section `Attributes`:
 
 ```json
@@ -121,15 +257,6 @@ The app logic defined in the hub contains in the section `Attributes`:
 ```
 
 ### Transaction
-
-The following transactions are supported:
-
-* answer to a question;
-* ignore a question;
-* report a question;
-* pick the best answer;
-* ask some more users;
-* report an answer.
 
 The app logic defined in the hub contains in the section `Transactions`:
 
@@ -243,65 +370,7 @@ The app logic defined in the hub contains in the section `Transactions`:
 }
 ```
 
-#### Answer to a question
-
-It is identified by the label `answerTransaction`.
-
-Its attributes are:
-
-| Attribute | Type | Description |
-| ------------- | ---- | ----------- |
-| `answer` | _string_ | The answer given by the user to the question |
-| `anonymous` | _boolean_ | Whether to answer the question anonymously or not, if anonymous is chosen then the name of the user will not be shown |
-
-#### Ignore a question
-
-It is identified by the label `notAnswerTransaction`.
-
-#### Report a question
-
-It is identified by the label `reportQuestionTransaction`.
-
-Its attributes are:
-
-| Attribute | Type | Description |
-| ------------- | ---- | ----------- |
-| `reason` | _enum_ [`abusive`, `spam`] | The reason why the question was reported |
-
-#### Pick the best answer
-
-It is identified by the label `bestAnswerTransaction`.
-
-Its attributes are:
-
-| Attribute | Type | Description |
-| ------------- | ---- | ----------- |
-| `transactionId` | _string_ | The id of the picked answer transaction |
-| `reason` | _string_ | The reason why the specific answer was picked |
-| `helpful` | _enum_ [`notAtAllHelpful`, `slightlyHelpful`, `somewhatHelpful`, `veryHelpful`, `extremelyHelpful`] | How helpful is the bot in connecting with users following intentions |
-
-#### Ask some more users
-
-It is identified by the label `moreAnswerTransaction`.
-
-#### Report an answer
-
-It is identified by the label `reportAnswerTransaction`.
-
-Its attributes are:
-
-| Attribute | Type | Description |
-| ------------- | ---- | ----------- |
-| `transactionId` | _string_ | The id of the answer transaction that was reported |
-| `reason` | _enum_ [`abusive`, `spam`] | The reason why the specific answer was reported |
-
 ### Message
-
-The following messages are supported:
-
-* notify there is a new question to answer to;
-* notify there is a new answer to a question;
-* notify the provided answer has been marked as the preferred one.
 
 The app logic defined in the hub contains in the section `Callbacks`:
 
@@ -431,62 +500,7 @@ The app logic defined in the hub contains in the section `Callbacks`:
 }
 ```
 
-#### Question to answer
-
-It is identified by the label `QuestionToAnswerMessage`.
-
-Its attributes are:
-
-| Attribute | Type | Description |
-| ------------- | ---- | ----------- |
-| `taskId` | _string_ | The id of the task associated with the question |
-| `question` | _string_ | The question to answer to |
-| `userId` | _string_ | The id of the user who proposed the question |
-| `sensitive` | _boolean_ | Whether the question is sensitive or not, if it is sensitive the bot will let other people know to take extra care in answering the question |
-| `anonymous` | _boolean_ | Whether to ask the question anonymously or not, if anonymous is chosen then the name of the user will not be shown |
-| `positionOfAnswerer` | _enum_ [`nearby`, `anywhere`] | How close the users should be to receive the question, if nearby is chosen the question has not the possibility to be postponed because the question requires a fast answer |
-
-#### Answer to question
-
-It is identified by the label `AnsweredQuestionMessage`.
-
-Its attributes are:
-
-| Attribute | Type | Description |
-| ------------- | ---- | ----------- |
-| `taskId` | _string_ | The id of the task associated with the question |
-| `question` | _string_ | The question to answer to |
-| `transactionId` | _string_ | The id of the transaction associated to the answer |
-| `answer` | _string_ | The answer to the question |
-| `userId` | _string_ | The id of the user who answered the question |
-| `anonymous` | _boolean_ | Whether the user prefers to answer the question anonymously or not, if anonymous is chosen then the name of the user will not be shown |
-
-:::note
-If access to the complete list of answers is required, this can be done by accessing the updated details of a task.
-:::
-
-#### Answer picked
-
-It is identified by the label `AnsweredPickedMessage`.
-
-| Attribute | Type | Description |
-| ------------- | ---- | ----------- |
-| `taskId` | _string_ | The id of the task associated with the question |
-| `question` | _string_ | The question for which was picked the answer |
-| `transactionId` | _string_ | The id of the transaction associated to the answer |
-
-### Norms
-
-The following norms are supported:
-
-* when the task is created filter the possible users to ask about and ask them;
-* notify user if it can help with a question;
-* provide an answer to a question;
-* notify the questioner about the answer;
-* notify to the users about best answer;
-* notify the user that its answer is picked;
-* ask more users;
-* nothing to do with some transactions only store them.
+### Norm
 
 The app logic defined in the hub contains in the section `Norms`:
 
