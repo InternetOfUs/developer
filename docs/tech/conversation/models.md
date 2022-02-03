@@ -3,7 +3,7 @@ title: Models
 sidebar_label: Models
 ---
 
-Conversations are possible thanks to 3 different models:
+Conversations are possible thanks to 5 different models:
 
 1. task type
 2. norm
