@@ -17,7 +17,14 @@ module.exports = {
             'tech/usecase/ask-for-helpv2',
             'tech/usecase/survey-app'
         ],
-    }
+    },
+    {
+      type: 'category',
+      label: 'Open Calls',
+      items: [
+          'tech/opencalls/ask-for-help',
+      ],
+  }
   ],
   pilot: [
     'platform/intro',
