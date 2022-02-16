@@ -574,10 +574,10 @@ The app logic defined in the hub contains in the section `Norms`:
 ```json
 [
    {
-      description: "Notify user of any received incentive",
-      whenever: "is_received_send_incentive(Incentive)",
-      thenceforth: "send_user_message('INCENTIVE',Incentive)",
-      ontology: null
+      "description": "Notify user of any received incentive",
+      "whenever": "is_received_send_incentive(Incentive)",
+      "thenceforth": "send_user_message('INCENTIVE',Incentive)",
+      "ontology": null
    }
 ]
 ```
