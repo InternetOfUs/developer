@@ -1,6 +1,6 @@
 ---
-title: Interaction protocol engine
-sidebar_label: Interaction protocol engine
+title: Interaction Protocol Engine
+sidebar_label: Interaction Protocol Engine
 ---
 
 The interaction protocol engine component is the one responsible for guaranteeing
