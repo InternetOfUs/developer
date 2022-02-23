@@ -11,6 +11,14 @@ module.exports = {
         },
         {
             type: 'category',
+            label: 'App Development',
+            items: [
+                'tech/app/intro',
+                'tech/app/platform-api'
+            ]
+        },
+        {
+            type: 'category',
             label: 'Use cases',
             items: [
                 'tech/usecase/ask-for-help',
@@ -33,6 +41,7 @@ module.exports = {
         'platform/task-manager',
         'platform/interaction-protocol-engine',
         'platform/personal-context-builder',
+        'platform/service-api',
         'platform/realtime',
         {
             type: 'category',
