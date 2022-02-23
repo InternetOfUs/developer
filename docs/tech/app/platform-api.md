@@ -11,57 +11,57 @@ As already mentioned in the [Service API](/docs/platform/service-api) page the m
 
 The scopes are divided in three categories:
 
-- **Public** scopes: The scopes are always enabled by default in your application, they comprend the read acess to some public information about the user
-- **Read** scopes: These scopes grant the read access to the user infomration
-- **Write** scopes: These scopes grants the write acess to the user information.
+- **Public** scopes: The scopes are always enabled by default in your application, they comprehend the read access to some public information about the user
+- **Read** scopes: These scopes grant the read access to the user's information
+- **Write** scopes: These scopes grants the write access to the user's information.
 
 This is the list of the scopes divided by category:
 
 - **Public** scopes:
-    - **ID**: Allows the application to read the user ID
-    - **First Name**: Allows the application to read the user first name
-    - **Last Name**: Allows the application to read the user last name
+    - **ID**: Allows the application to read the user's ID
+    - **First Name**: Allows the application to read the user's first name
+    - **Last Name**: Allows the application to read the user's last name
 - **Read** scopes:
-    - **Middle Name**: Allows the application to read the user middle name
-    - **Prefix Name**: Allows the application to read the user prefix name
-    - **Suffix Name**: Allows the application to read the user suffix name
-    - **Birthdate**: Allows the application to read the user birthdate
-    - **Gender**: Allows the application to read the user gender
-    - **Email**: Allows the application to read the user email
-    - **Phone Number**: Allows the application to read the user phone number
-    - **Locale**: Allows the application to read the user locale
-    - **Avatar**: Allows the application to read the user avatar
-    - **Nationality**: Allows the application to read the user nationality
-    - **Occupation**: Allows the application to read the user occupation
-    - **Norms**: Allows the application to read the user norms
-    - **Activities**: Allows the application to read the user activities
-    - **Locations**: Allows the application to read the user locations
-    - **Relationship**: Allows the application to read the user relationship
-    - **Behaviours**: Allows the application to read the user behaviours
-    - **Materials**: Allows the application to read the user materials
-    - **Competencies**: Allows the application to read the user competencies
-    - **Meanings**: Allows the application to read the user meanings
+    - **Middle Name**: Allows the application to read the user's middle name
+    - **Prefix Name**: Allows the application to read the user's prefix name
+    - **Suffix Name**: Allows the application to read the user's suffix name
+    - **Birthdate**: Allows the application to read the user's birthdate
+    - **Gender**: Allows the application to read the user's gender
+    - **Email**: Allows the application to read the user's email
+    - **Phone Number**: Allows the application to read the user's phone number
+    - **Locale**: Allows the application to read the user's locale
+    - **Avatar**: Allows the application to read the user's avatar
+    - **Nationality**: Allows the application to read the user's nationality
+    - **Occupation**: Allows the application to read the user's occupation
+    - **Norms**: Allows the application to read the user's norms
+    - **Activities**: Allows the application to read the user's activities
+    - **Locations**: Allows the application to read the user's locations
+    - **Relationship**: Allows the application to read the user's relationship
+    - **Behaviours**: Allows the application to read the user's behaviours
+    - **Materials**: Allows the application to read the user's materials
+    - **Competencies**: Allows the application to read the user's competencies
+    - **Meanings**: Allows the application to read the user's meanings
 - **Write** Scopes:
-   - **First Name**: Allows the application to write the user first name
-    - **Last Name**: Allows the application to write the user last name
-    - **Middle Name**: Allows the application to write the user middle name
-    - **Prefix Name**: Allows the application to write the user prefix name
-    - **Suffix Name**: Allows the application to write the user suffix name
-    - **Birthdate**: Allows the application to write the user birthdate
-    - **Gender**: Allows the application to write the user gender
-    - **Email**: Allows the application to write the user email
-    - **Phone Number**: Allows the application to write the user phone number
-    - **Locale**: Allows the application to write the user locale
-    - **Avatar**: Allows the application to write the user avata
-    - **Nationality**: Allows the application to write the user nationality
-    - **Occupation**: Allows the application to write the user occupation
-    - **Norms**: Allows the application to write the user norms
-    - **Activities**: Allows the application to write the user activities
-    - **Locations**: Allows the application to write the user locations
-    - **Relationship**: Allows the application to write the user relationship
-    - **Behaviours**: Allows the application to write the user behaviours
-    - **Materials**: Allows the application to write the user materials
-    - **Competencies**: Allows to write the user competencies
-    - **Meanings**: Allows to write the user meanings
-    - **Conversation**: Allows the application to log the user conversation to platform logging system
+   - **First Name**: Allows the application to write the user's first name
+    - **Last Name**: Allows the application to write the user's last name
+    - **Middle Name**: Allows the application to write the user's middle name
+    - **Prefix Name**: Allows the application to write the user's prefix name
+    - **Suffix Name**: Allows the application to write the user's suffix name
+    - **Birthdate**: Allows the application to write the user's birthdate
+    - **Gender**: Allows the application to write the user's gender
+    - **Email**: Allows the application to write the user's email
+    - **Phone Number**: Allows the application to write the user's phone number
+    - **Locale**: Allows the application to write the user's locale
+    - **Avatar**: Allows the application to write the user's avata
+    - **Nationality**: Allows the application to write the user's nationality
+    - **Occupation**: Allows the application to write the user's occupation
+    - **Norms**: Allows the application to write the user's norms
+    - **Activities**: Allows the application to write the user's activities
+    - **Locations**: Allows the application to write the user's locations
+    - **Relationship**: Allows the application to write the user's relationship
+    - **Behaviours**: Allows the application to write the user's behaviours
+    - **Materials**: Allows the application to write the user's materials
+    - **Competencies**: Allows to write the user's competencies
+    - **Meanings**: Allows to write the user's meanings
+    - **Conversation**: Allows the application to log the user conversations to platform logging system
     - **Data**: Allows the application to send relatime data abaout the user through the [Realtime API](/docs/platform/realtime)
