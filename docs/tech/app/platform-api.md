@@ -5,7 +5,7 @@ sidebar_label: Platform API
 
 ## Platform API
 
-As already mentioned in the [Service API](/docs/platform/service-api) page the main entry point for the platform api are the Service API component
+As already mentioned in the [Service API](/docs/platform/service-api) page the main entry point for the platform api are the Service API component. The documentation of its endpoints is located [here](https://github.com/InternetOfUs/components-documentation/blob/master/sources/wenet-service_api-openapi.yaml).
 
 ## Scopes {#scopes}
 
