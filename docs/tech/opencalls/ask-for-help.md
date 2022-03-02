@@ -11,19 +11,35 @@ If you want to deploy an instance of the **AskForHelp Chatbot** in the context o
 - The bot Oauth2 callback url;
 - The bot conversational url.
 
-The next step is creating a bot on the Telegram platform, you will find all the information on the [official documentation](https://core.telegram.org/bots).
+### Telegram configuration
 
+The next step is creating a bot on the Telegram platform, you will find all the information on the [official documentation](https://core.telegram.org/bots). Optionally it is possible to configure the bot commands using the Telegram [BotFather](https://core.telegram.org/bots#6-botfather). You can use the following list:
+
+```
+start - Start the bot
+help - Got stuck? Discover what you can do
+info - Get some basic info about the commands of the bot
+ask - Ask a question to the community
+questions - Get some questions to which answer to
+badges - Get insights on your badge status
+cancel - Cancel the current operation
+```
+
+
+### WeNet Application configuration (WeNet Hub)
 
 Then you have to create your own [App Logic](tech/conversation/app-logic.md). You will find an example [here](tech/usecase/ask-for-helpv2.md).
 
 
 The next step is creating an application on the [Wenet Hub](https://internetofus.u-hopper.com) using the information we provide to you. During the Oauth2 configuration you have to select the following scopes:
 
-- `User ID`
-- `First name`
-- `Last name`
-- `Conversation logging`
-- `Language`
+- **read**:
+    - `User ID`
+    - `First name`
+    - `Last name`
+    - `Locale`
+- **write**:
+    - `Conversation`
 
 In the **Community** box click the `edit` button and compile the norms field. You can find an example [here](tech/usecase/ask-for-helpv2.md#community-norm).
 
