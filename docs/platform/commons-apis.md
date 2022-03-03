@@ -3,18 +3,62 @@ title: Commons APIs
 sidebar_label: Commons APIs
 ---
 
-## What is it?
 
-Commons APIs manages streams of data that are pushed mainly from external aplications towards the WeNet Platform (example: the iLog application from the University of Trento).  This component interacts with the iLogBase component to provide the services for saving and sharing the streams to the internal component of the WeNet Infrastructure.
+# What is it?
 
-The Commons APIS provides services for the External Applications that want to collaborate with the WeNet platform by pushing data.
+Commons APIs manages streams of data that are pushed mainly from external applications towards the WeNet Platform. An example of an external application can be the iLog application from the University of Trento. The Commons APIs component interacts with the iLogBase component for saving and sharing the streams to the internal component of the WeNet Platform.
 
-The iLogbase provides services for handling big data within the WeNet Platform. The services include the management of streams of data with batch services and with subscription/notification services.
+The Commons APIS provides services for the External Applications that want to collaborate with the WeNet Platform by pushing data inside the Platform.
 
-## Implemented Streams
 
-The implemented streams are the following:
-1. Location (locationeventpertime)
+# Availability
+
+* The source code is in [github](https://github.com/InternetOfUs/streambase).
+* The production deployment is in the [URL](https://internetofus.u-hopper.com/prod/api/common/).
+
+# Requirements for Usage
+
+1. Register your application in the WeNet Hub.
+   1. You will obtain your WeNet oAuth2 credentials (appId, appSecret, Callback URL) for authentication and usage of the Commons APIs. 
+2. The Web application should be deployed in a server accessible from the Internet.
+
+
+# Related WeNet components
+
+* **iLogBase component**: The iLogbase provides services for handling big data within the WeNet Platform. The services include the management of streams of data with batch services and with subscription/notification services.
+* **Authentication and Authorization component**: To access the Commons APIs you need to use the Authentication and Authorization Component of the WeNet Platform. 
+
+
+# Implemented Streams
+
+## The main JSON structure:
+
+```json
+{
+    "userId": "abcd123",
+    "appId": "Wenet2",
+    "data":	{
+        locationeventpertime [...]
+        accelerometerevent [...]
+        gyroscopeevent [...]
+        tasksanswers [...]
+        tasksquestions [...]
+        socialrelations [...]
+        touchevent [...]
+        socialprofile [...]
+        socialevent [...]
+        socialpost [...]
+    }
+}
+```
+        
+## The implemented streams:
+
+* Main Characteristics:
+  * **ts** is integer as epoch in miliseconds
+  * **meta** is optional.
+
+1. Location (name in the json:**locationeventpertime**)
 ```json
 "locationeventpertime": [
   {
@@ -37,7 +81,7 @@ The implemented streams are the following:
 ]
 ```
    
-2. Accelerometer (accelerometerevent)
+2. Accelerometer (name in the json:**accelerometerevent**)
 ```json   
 "accelerometerevent": [
     {
@@ -54,7 +98,7 @@ The implemented streams are the following:
 ]
 ```
 
-3. Gyroscope (gyroscopeevent)
+3. Gyroscope (name in the json:**gyroscopeevent**)
 ```json
 "gyroscopeevent": [
     {
@@ -70,7 +114,7 @@ The implemented streams are the following:
    }
 ]
 ```
-4. Touch (touchevent)
+4. Touch (name in the json:**touchevent**)
 ```json
 "touchevent": [
   {
@@ -82,7 +126,7 @@ The implemented streams are the following:
   }
 ]
 ```
-5. Social Relations (socialrelations)
+5. Social Relations (name in the json:**socialrelations**)
 ```json
 "socialrelations": [
       {
@@ -101,7 +145,7 @@ The implemented streams are the following:
       }
     ]
 ```
-6. Social Profiles (socialprofile)
+6. Social Profiles (name in the json:**socialprofile**)
 ```json
     "socialprofile": [
       {
@@ -118,7 +162,7 @@ The implemented streams are the following:
       }
     ]
 ```
-7. Social Events (socialevent)
+7. Social Events (name in the json:**socialevent**)
 ```json
 "socialevent": [
       {
@@ -138,7 +182,7 @@ The implemented streams are the following:
       }
     ]
 ```
-8. Social Posts (socialpost)
+8. Social Posts (name in the json:**socialpost**)
 ```json
  "socialpost": [
       {
@@ -169,7 +213,7 @@ The implemented streams are the following:
       }
     ]
 ```
-9. Tasks Questions (tasksquestions)
+9. Tasks Questions (name in the json:**tasksquestions**)
 ```json
 "tasksquestions": [
       {
@@ -241,7 +285,7 @@ The implemented streams are the following:
       }
     ]
 ```
-10. Tasks Answers (tasksanswers)
+10. Tasks Answers (name in the json:**tasksanswers**)
 ```json
 "tasksanswers": [
       {
@@ -283,8 +327,9 @@ From the logical architecture of the WeNet Platform we have two related modules:
 
 ## Repository
 
-1. Commons APIs (and streambase) https://github.com/InternetOfUs/streambase
+1. Commons APIs (and streambase) [link](https://github.com/InternetOfUs/streambase)
 
 ## Documentation
 
-1. WeNet Platform Documentation https://github.com/InternetOfUs/components-documentation
+1. WeNet Platform Documentation [link](https://github.com/InternetOfUs/components-documentation)
+2. Commons APIs Swagger Documentation [link](https://github.com/InternetOfUs/components-documentation/blob/master/sources/wenet-common_api-openapi.yaml)
