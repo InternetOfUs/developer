@@ -13,7 +13,7 @@ its norm engine to evaluate the actions that a user do or the notification that 
 The norms are defined on the profile of the user, on the community that the user is, into the task
 that the user is involved in and in the same message. The norm engine of each user decided with norms
 has to be evaluated depending on the interaction and the status of the user. These norm engines are
-in rest mode and when a message is received, they collect the necessary norms evaluate them and do 
+in rest mode and when a message is received, they collect the necessary norms evaluate them and do
 the actions of the norms that are satisfied. The messages that start a norm engine are associated
 with one of the next actions:
 
@@ -22,11 +22,11 @@ with one of the next actions:
 - **Send Incentive**: When the incentive server wants to send an incentive to a user.
 - **Received a message**: When a norm engine receives a message from another norm engine.
 - **Received an event**: When a norm engine notifies himself of an event.
- 
+
 On the other hand, the norms are formed by a set of conditions that if they are satisfied execute
 a set of actions associated with it. A grosso modo the conditions check the action that has started
 the norm engine or the status of the user, and the actions can send a message to the user associated
-with the norm engine or send a message to the norm engine of another user. 
+with the norm engine or send a message to the norm engine of another user.
 
 The norm engine is developed in [SWI Prolog](https://www.swi-prolog.org/), so this is the language
 that is used to define the norms. The norm and action as defined as predicates. A predicate is like
@@ -61,7 +61,7 @@ with the start time less than or equals to now.
 As you can see the arguments of the conditions or the actions can be a **variable** or a value. A variable starts
 with an upper case letter followed by letters, numbers or the underscore. ATTENTION, the variables
 only be associated with a value. In other words, when a variable is associated with a value, it can not be changed
-in all the norm. So, if you want to change the value of a variable you must define a new variable. The values 
+in all the norm. So, if you want to change the value of a variable you must define a new variable. The values
 as argument of the predicate or a value of a variable can be:
 
 - A **Boolean** value that can be ``true`` or ``false``.
@@ -95,7 +95,7 @@ what happens when each of these actions happens.
 When a user wants to create a task to do interact with the user interface of the application. This converts this
 into an HTTP request to the WeNet service component. This component checks the authentication and authorization
 of the user that runs the application. If it is valid the service component calls the WeNet task manager with the task
-to create. This component checks that the new task is valid and if it is then the task is stored and finally it calls 
+to create. This component checks that the new task is valid and if it is then the task is stored and finally it calls
 the WeNet interaction protocol engine to inform that a task is created. This last one gets the norms of the user that
 create the task, the norms of the community where is defined the task, the norms of the task type associated with the task,
 and the norms of the task, and start a new norm engine to validate this tasks. From this point what happens depends
@@ -142,7 +142,7 @@ The task transaction validation by the WeNet task manager consists of verifying:
 - That the agent that does the transaction has a profile on the WeNet platform.
 - That the label and attributes of the transaction match any of the possibles defined by the task type associated
   with the task of the transaction.
- 
+
 
 ### Send an incentive
 
@@ -237,11 +237,11 @@ to the user of the norm engine that has been started.
 
 ### Me conditions
 
-The next conditions are over the user associated with the norm engine (**me**). 
+The next conditions are over the user associated with the norm engine (**me**).
 
 - ``get_profile_id(Me)``
   This condition is used to obtain the identifier to the user associated with the norm engine.
-    * ``Me``  _Output_  string with the identifier of the user.	
+    * ``Me``  _Output_  string with the identifier of the user.
 - ``get_profile(Profile)``
   This condition is used to obtain the profile of the user associated with the norm engine at the moment it is started.
     * ``Profile``  _Output_   JSON model with the profile.
@@ -258,33 +258,37 @@ The next conditions are over the user associated with the norm engine (**me**).
     * ``Value``  _Output_  value associated with the attribute or the default one if it is not defined.
     * ``Key``  _Input_  string with the name of the attribute.
     * ``DefaultValue``  _Input_  value to return if the attribute is not defined.
-    
+- ``get_relationships(Relationships)``
+  This condition obtains the best 1k social network relationships of the current user repect
+  the other application users. value of a user state attribute, or a default value if it is not defined.
+    * ``Relationships``  _Output_  array of JSON models with my social network relationships.
+
 
 ### Application conditions
 
-The next conditions are over the application associated with the norm engine. 
+The next conditions are over the application associated with the norm engine.
 
 - ``get_app_id(AppId)``
   This condition is used to obtain the identifier to the application associated with the norm engine.
-    * ``AppId``  _Output_  string with the identifier of the application.	
+    * ``AppId``  _Output_  string with the identifier of the application.
 - ``get_app(App)``
   This condition obtains the model data of the application associated with the norm engine. The data model
   is obtained the first time this condition is called, after that the value is fixed.
     * ``App``  _Output_  JSON model with the application data.
-- ``get_app_message_callback_url(Url)`` 
+- ``get_app_message_callback_url(Url)``
   This condition obtains the URL to post the messages to send to the user into the application
   associated with the norm engine. The URL is obtained the first time this condition is called, after that
   the value is fixed.
     * ``Url``  _Output_  string to the URL to post the callback messages.
-  
-  
+
+
 ### Community conditions
 
 The next conditions are over the community associated with the norm engine.
-  
+
 - ``get_community_id(CommunityId)``
   This condition is used to obtain the identifier to the community associated with the norm engine.
-    * ``CommunityId``  _Output_  string with the identifier of the community.	
+    * ``CommunityId``  _Output_  string with the identifier of the community.
 - ``get_community(Community)``
   This condition obtains the model data of the community associated with the norm engine. The data model
   is obtained the first time this condition is called, after that the value is fixed.
@@ -306,11 +310,11 @@ The next conditions are over the community associated with the norm engine.
 
 ### Task conditions
 
-The next conditions are over the task associated with the norm engine. 
+The next conditions are over the task associated with the norm engine.
 
 - ``get_task_id(TaskId)``
   This condition is used to obtain the identifier to the task associated with the norm engine.
-    * ``TaskId``  _Output_  string with the identifier of the task.	
+    * ``TaskId``  _Output_  string with the identifier of the task.
 - ``get_task(Task)``
   This condition is used to obtain the task associated with the norm engine at the moment it is started.
     * ``Task``  _Output_   JSON model with the task.
@@ -361,16 +365,16 @@ The next conditions are over the task associated with the norm engine.
   This condition is used to obtain a sub set of the transactions that has been done in the task
   and map them to a new value. In other words, for each transaction of the current task if
   ``call(Test,Transaction)`` is True, it transforms the transaction with ``call(Map,Value,Transaction)``
-  and it adds the obtained Value to the result list.  
+  and it adds the obtained Value to the result list.
     * ``Result``  _Output_  anything the filtered and mapped task transactions.
-    * ``Test``  _Input_  predicate to call to known if the transaction is accepted. 
+    * ``Test``  _Input_  predicate to call to known if the transaction is accepted.
     * ``Map``  _Input_  predicate to call to convert the accepted transaction.
 
-  
+
 ### Social context builder conditions
 
-The next conditions are used to interact with the social context builder. 
-  
+The next conditions are used to interact with the social context builder.
+
 - ``get_social_explanation(Explanation,UserId)``
   This condition obtains the explanation of why a user has to be chosen to be a volunteer.
     * ``Explanation``  _Output_  JSON model with the explanation provided by the social context builder.
@@ -383,8 +387,8 @@ The next conditions are used to interact with the social context builder.
 
 ### Personal context builder conditions
 
-The next conditions are used to interact with the personal context builder 
-  
+The next conditions are used to interact with the personal context builder
+
 - ``normalized_closeness(Closeness,Users,MaxDistance)``
   Calculate the closeness (in distance) of the current user to some others.
     * ``Closeness``  _Output_  JSON model list with the userId and value on the range [0,1] with the close in distance to the user. Where 1 is at the same location and on the 0 is too far away.
@@ -394,8 +398,8 @@ The next conditions are used to interact with the personal context builder
 
 ### Diversity conditions
 
-The next conditions are used to manage the diversity of some users. 
-  
+The next conditions are used to manage the diversity of some users.
+
 - ``normalized_diversity(Diversity,Users,Attributes)``
   Calculate the diversity of the current user over some other users.
     * ``Diversity``  _Output_  JSON model list with the userId and value on the range [0,1] with the diversity of the user. Where 1 is the maximum diversity and 0 that the user is similar to.
@@ -453,7 +457,7 @@ The next conditions are used to manage JSON models.
 
 The norms to do when the conditions of a norm are predicates separated by the conjunction ``and``. You can use
 any predicate defined by the [SWI Prolog](https://www.swi-prolog.org/), but before you have to mark it as ``dynamic``
-on the ontology of the norm. The next sections show the most common actions that have been provided to help 
+on the ontology of the norm. The next sections show the most common actions that have been provided to help
 to the norm definition.
 
 
@@ -474,7 +478,7 @@ These actions are done over the user that is associated with the norm engine, th
   This action changes an attribute of the state of the user.
     * ``Key``  _Input_  string with the name of the state attribute.
     * ``Value``  _Input_  value to put to the attribute of the state.
- 
+
 
 ### Community actions
 
@@ -566,7 +570,7 @@ These actions interact with the other components of the WeNet platform.
 - ``notify_social_context_builder_message_sent(Message)``
   This action notifies the social context builder that a message is sent to the user.
     * ``Message``  _Input_  JSON model with the sent message.
- 
+
 
 ## Other Useful Norms predicates
 
@@ -592,10 +596,10 @@ The next predicates refer to facts (constants) that have been set when the norm 
 - ``wenet_interaction_protocol_engine_api_url(URL)``
   The fact with the URL to the interaction protocol engine component.
     * ``URL``  _Output_  string with the tinteraction protocol engine API URL.
-- ``wenet_social_context_builder_api_url(URL)`` 
+- ``wenet_social_context_builder_api_url(URL)``
   The fact with the URL to the social context builder component.
     * ``URL``  _Output_  string with the social context builder API URL.
-- ``wenet_service_api_url(URL)`` 
+- ``wenet_service_api_url(URL)``
   The fact with the URL to the service component.
     * ``URL``  _Output_  string with the service API URL.
 - ``wenet_incentive_server_api_url(URL)``
@@ -760,6 +764,22 @@ The next predicates are used to interact with the profile manager component.
   This predicate obtains the identifier of a community.
     * ``Id``  _Output_  string with the identifier of the community.
     * ``Community``  _Input_  JSON model of the community to obtain the identifier.
+- ``wenet_profile_manager_get_social_network_relationships_page(Page,AppId,SourceId,TargetId,Type,WeightFrom,WeightTo,Order,Offset,Limit)``
+  This predicate searches for some social network relationships.
+    * ``Page``  _Output_  JSON model with the relationships that match the query parameters.
+    * ``AppId``  _Input_  string with the application identifier for the relationships to return.
+    * ``SourceId``  _Input_  string with the user identifier that is the source of the relationships to return.
+    * ``TargetId``  _Input_  string with the user identifier that is the target of the relationships to return.
+    * ``Type``  _Input_  string the type of the relationships to return.
+    * ``WeightFrom``  _Input_  number minimum, inclusive, weight of the relationships to return.
+    * ``WeightTo``  _Input_  number maximum, inclusive, weight of the relationships to return.
+    * ``Order``  _Input_  string with the order to return the relationships.
+    * ``Offset``  _Input_  number with the index of the first relationship to return.
+    * ``Limit``  _Input_  number with the maximum relationships to return.
+- ``wenet_relationships_of_page(Relationships,Page)``
+  This predicate returns the relationships defined on a page.
+    * ``Relationships``  _Output_  array of JSON models with the relationships defined on the page.
+    * ``Page``  _Input_  JSON model with the relationships to get.
 
 
 ### Task manager
@@ -797,7 +817,7 @@ The next predicates are used to interact with the task manager component.
   This predicate obtains the identifier of a task.
     * ``Id``  _Output_  string with the identifier of the task.
     * ``Task``  _Input_  JSON model of the task to obtain the identifier.
-- ``wenet_task_type_id_of_task(Id, Task)`` 
+- ``wenet_task_type_id_of_task(Id, Task)``
   This predicate obtains the task type identifier of a task.
     * ``Id``  _Output_  string with the identifier of the task type.
     * ``Task``  _Input_  JSON model of the task to obtain the task type identifier.
@@ -1193,7 +1213,7 @@ The next predicates are used to interact with the social context builder compone
     * ``SenderId``  _Input_  string with the identifier of the user that started the interaction.
     * ``Message``  _Input_  JSON model with the message that is sent to the user.
 
-    
+
 ### Personal context builder
 
 The next predicates are used to interact with the personal context builder component.
@@ -1201,7 +1221,7 @@ The next predicates are used to interact with the personal context builder compo
 - ``wenet_personal_context_builder_url_to(Url,Paths)``
   This predicate is used to obtain the URL to interact with the API of the personal context builder.
   For example if the URL of the personal context builder API is
-  **https://wenet.u-hopper.com/prod/personal_context_builder** , ``Latitude = 0.2`` , ``Longitude = 0.1`` 
+  **https://wenet.u-hopper.com/prod/personal_context_builder** , ``Latitude = 0.2`` , ``Longitude = 0.1``
   and ``NumUsers = 4``
   then ``wenet_personal_context_builder_url_to(Url,['/closest/?latitude=',Latitude,'&longitude=',Longitude,'&nb_user_max=',NumUsers])``
   will produce ``URL = 'https://wenet.u-hopper.com/prod/personal_context_builder/closest/?latitude=0.2&longitude=0.1&nb_user_max=4'``.
@@ -1264,26 +1284,25 @@ The next predicates are used to interact with the personal context builder compo
     * ``Locations``  _Input_  array of JSON models with the locations to filter.
     * ``Min``  _Input_  number with the minimum distance in meters to the source location. The distance is inclusive.
     * ``Max``  _Input_  number with the maximum distance in meters to the source location. The distance is inclusive.
-    
+
 
 ## Deprecated predicates
 
 The  predicates of this section are only for backward compatibility, but you should avoid
 to use them.
 
-
-### Incentive server
-
 - ``notify_incentive_server(Action,Message)``
   This action notifies the incentive server about a change of the task.
   This function is no more available on the incentive server API. So nothings do.
     * ``Action``  _Input_  string with the action that has changed the task.
-    * ``Message``  _Input_  string that explains the change. 
+    * ``Message``  _Input_  string that explains the change.
+
 - ``wenet_incentive_server_update_task_status(Updated,Status)``
   This predicate is used to update the task status.
   This function is no more available on the incentive server API. So nothings do.
     * ``Updated``  _Output_  JSON model with the updated status.
     * ``Status``  _Input_  JSON model with the task status to update.
+
 - ``wenet_new_task_status(Status,AppId,UserId,CommunityId,TaskId,Action,Message)``
   This predicate is used to create the task status.
   This data model is no more used.
@@ -1294,12 +1313,25 @@ to use them.
     * ``TaskId``  _Input_  string with the task identifier of the status.
     * ``Action``  _Input_  string with the action of the status.
     * ``Message``  _Input_  string with the message of the status.
+
 - ``wenet_social_context_builder_update_preferences(UserId,TaskId,Users)``
   This predicate is deprecated use wenet_social_context_builder_post_preferences instead.
     * ``UserId``  _Input_  string with the user identifier.
     * ``TaskId``  _Input_  string with the task identifier.
     * ``Users``  _Input_  array of string with the identifiers of the preferred users.
+
 - ``notify_volunteers_to_social_context_builder(Volunteers,UserId)``
   This predicate is deprecated use volunteers_ranking instead.
     * ``Volunteers``  _Input_  array of strings with the user identifiers that has volunteer to do a task.
     * ``UserId``  _Input_  string user identifier to be a volunteer.
+
+- ``wenet_relationships_of_profile(Relationships,Profile)``
+  The profile does not have mpore relationships use get_relationships instead.
+    * ``Relationships``  _Output_  array of JSON models with the relationships of the profile.
+    * ``Profile`` _Input_  JSON model to get the relationships.
+
+- ``wenet_user_id_of_relationship(UserId, Relationship)``
+  The relationship define new fields and teh userId is changes to targetId.
+  Use wenet_target_id_of_relationship instead.
+    * ``UserId``  _Output_  string eith the user identifier of the relationship.
+    * ``Relationship``  _Input_  JSON model to get the user identifier.
