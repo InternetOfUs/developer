@@ -28,7 +28,6 @@ A relation object is constructed from:
 
 
 ### Social Ranking Component
-Description:
 
 The social ranking component is responsible for ranking volunteers  
 with respect to a specific task that a user poses. It analyzes the  
