@@ -12,7 +12,6 @@ data within the WENET platform.
 ## Usage
 
 ### Social Relations Component
-Description:
 The Social Relations component aims at analysing the social  
 interactions of the users and specifies two pieces of information.  
 The first concerns the relationships between them and the second is the tie  
