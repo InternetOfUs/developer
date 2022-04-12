@@ -7,7 +7,7 @@ sidebar_label: Social Context Builder
 
 The Social Context Builder is responsible for building and  
 maintaining the social details of a user profile, by leveraging  
-data within the WENET platform.
+data within the WENET platform. The API documentation for the component is located [here](https://swagger.u-hopper.com/?url=https://raw.githubusercontent.com/InternetOfUs/components-documentation/master/sources/wenet-social_context_builder-openapi.yaml).
 
 ## Usage
 
