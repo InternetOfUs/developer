@@ -7,7 +7,7 @@ sidebar_label: Social Context Builder
 
 The Social Context Builder is responsible for building and  
 maintaining the social details of a user profile, by leveraging  
-data within the WENET platform
+data within the WENET platform.
 
 ## Usage
 
