@@ -432,6 +432,44 @@ between the time the norm engine is started and midnight, January 1, 1970, UTC.
 - ``is_now_equal_to(Time)``
   This condition is **true** when **now** is equal to a value.
     * ``Time``  _Input_  integer time in seconds to check.
+- ``is_now_on_week_day(WeekDay)``
+  Check if **now** is on the specified week day.
+    * ``WeekDay``  _Input_  integer with the week day that has to be **now**. It is a value on the range [1,7]
+    where 1 => Monday ... 7=> Sunday.
+- ``is_now_one_of_week_days(WeekDays)``
+  Check if **now** is on the specified week day.
+    * ``WeekDays``  _Input_  array of integer with the week days that can be **now**.
+    A weekday is a value on the range [1,7] where 1 => Monday ... 7=> Sunday.
+- ``is_now_on_monday()``
+  Check if **now** is on Monday.
+- ``is_now_on_tuesday()``
+  Check if **now** is on Tuesday.
+- ``is_now_on_wednesday()``
+  Check if **now** is on Wednesday.
+- ``is_now_on_thursday()``
+  Check if **now** is on Thursday.
+- ``is_now_on_friday()``
+  Check if **now** is on Friday.
+- ``is_now_on_saturday()``
+  Check if **now** is on Saturday.
+- ``is_now_on_sunday()``
+  Check if **now** is on Sunday.
+- ``is_now_before_time(Time)``
+  Check if now is before the specified time.
+    * ``Time``  _Input_  string on the format H:M where H is between 00 and 23, and MM between 00 and 59.
+- ``is_now_before_time_or_equals(Time)``
+  Check if now is before or equals to the specified time.
+    * ``Time``  _Input_  string on the format H:M where H is between 00 and 23, and MM between 00 and 59.
+- ``is_now_after_time(Time,String)``
+  Check if now is after the specified time.
+    * ``Time``  _Input_  string on the format H:M where H is between 00 and 23, and MM between 00 and 59.
+- ``is_now_after_time_or_equals(Time)``
+  Check if now is after or equals to the specified time.
+    * ``Time``  _Input_  string on the format H:M where H is between 00 and 23, and MM between 00 and 59.
+- ``is_now_between_times(Lower,Upper)``
+  heck if now is between the specified times.
+    * ``Lower``  _Input_  string on the format H:M where H is between 00 and 23, and MM between 00 and 59.
+    * ``Upper``  _Input_  string on the format H:M where H is between 00 and 23, and MM between 00 and 59.
 
 
 ### JSON conditions
@@ -710,6 +748,33 @@ The next predicates are used to do HTTP request into an URL.
 - ``wenet_delete_to_url(Url)``
   Delete a model from an URL.
     * ``Url``  _Input_  string with the URL to delete the model.
+
+### Time
+
+- ``now_to_week_day(WeekDay)``
+  Obtain the week day that is **now**.
+    * ``WeekDay``  _Output_  integer with the week day. It is a value on the range [1,7]
+    where 1 => Monday ... 7=> Sunday.
+- ``timestamp_to_week_day(WeekDay,Timestamp)``
+  Obtain the week day from a time stamp.
+    * ``WeekDay``  _Output_  integer with the week day. It is a value on the range [1,7]
+    where 1 => Monday ... 7=> Sunday.
+    * ``Timestamp``  _Input_  integer with the seconds from the midnight, January 1, 1970, UTC.
+- ``string_to_time(Time,String)``
+  Return the time associated to a string.
+    * ``Time``  _Output_  string on the format H:M where H is between 00 and 23, and MM between 00 and 59.
+    * ``String``  _Input_  string with the time to extract.
+- ``normalized_time(Time,String)``
+  Return the normalized time
+    * ``Time``  _Output_  string on the format H:M where H is between 00 and 23, and MM between 00 and 59.
+    * ``String``  _Input_  string to normalize.
+- ``timestamp_to_time(Time,Timestamp)``
+  Return the time associated to a time stamp.
+    * ``Time``  _Output_  string on the format H:M where H is between 00 and 23, and MM between 00 and 59.
+    * ``Timestamp``  _Input_  integer  with the epoch time since January 1, 1970 in seconds.
+- ``now_to_time(Time)``
+  Return the time associated to now.
+    * ``Time``  _Output_  string on the format H:M where H is between 00 and 23, and MM between 00 and 59.
 
 
 ### Utils
