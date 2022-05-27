@@ -33,6 +33,7 @@ module.exports = {
         'platform/task-manager',
         'platform/interaction-protocol-engine',
         'platform/personal-context-builder',
+        'platform/commons-apis',
         'platform/realtime',
         {
             type: 'category',
