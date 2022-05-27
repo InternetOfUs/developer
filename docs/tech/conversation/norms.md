@@ -41,11 +41,17 @@ get_task_attribute_value(StartTime,'startTime')
 The data model of a norm is defined in JSON, and it has the next fields:
 
 - **whenever** is used to define the conditions that have to satisfy to fire the actions.
- 	Each condition can be separated by the conjunctions **and**, **or** or **not**.
+ 	Each condition can be separated by the conjunctions **or** or **and**. Also, they can
+ 	start with **not**.
 - **thenceforth** is used to define the actions to do if the conditions are satisfied.
- 	Each action is separated by the conjunction **and**.
+ 	Each action is separated by the conjunction **and**. Also, they can start with **not**
+ 	or **delay**.
 - **ontology** is used to define new prolog predicates that can be used in any condition
    or action of a norm. If the predicate can be used as an action you must define it as **dynamic**.
+   This field is optional.
+- **description** is a text that describes what this norm is about. This field is optional.
+- **priority** is a number that defines in which order this norm has to be evaluated.
+   The high value represents the highest priority. This field is optional.
 
 The next example is the JSON representation of a norm to send an error to the user if try to create a task
 with the start time less than or equals to now.
@@ -174,6 +180,23 @@ An event is a message that a norm engine is sent to itself after a delay in seco
 engine and evaluate again the norms. For example: imagine a task that you want to close after a day, then you may define a
 norm that when the task is created send an event to be delivered after a day, and another norm to close the task when
 this event is received.
+
+
+## Norms priority
+
+The evaluation of the norms is done using its priority, from the higher priority to the lowest.
+This is used to fix any conflict that will appear during the execution of the actions. For example,
+if exist a fired norm that adds an action to send a user message, and another norm adds an action
+to not send a user message. This is a conflict, and the norm engine does only the action that has more
+priority and discards the other.
+
+When you define a norm you can specify its priority, the higher value you put the higher priority
+the norm has. If you did not specify the priority, it gets a default value depending on where it is defined
+and its position inside the list of the norms. Specifically, it is calculated as
+**MinPriority + size - norm_index**. For a norm in a **task** the minimum priority is **50000**,
+for a **profile** is **40000**, for a **community** is **30000**, and for a **task type** is **20000**.
+So, if we have seven individual norms and the third does not have a priority, it will have the priority
+**40005 = 40000 + 7 - 2** (remember the index on a list starts with **0**).
 
 
 ## Conditions
@@ -519,10 +542,14 @@ The next conditions are used to manage JSON models.
 
 ## Actions
 
-The norms to do when the conditions of a norm are predicates separated by the conjunction ``and``. You can use
-any predicate defined by the [SWI Prolog](https://www.swi-prolog.org/), but before you have to mark it as ``dynamic``
-on the ontology of the norm. The next sections show the most common actions that have been provided to help
-to the norm definition.
+The norms to do when the conditions of a norm are predicates separated by the conjunction ``and``.
+You can use any of the predicates defined on the next sections, any predicate defined by the [SWI Prolog]
+(https://www.swi-prolog.org/)(but before you have to mark it as ``dynamic`` on the ontology of the norm),
+disable any action with ``not(Action)``, or delay any action with ``delay(Action,Duration)``. For example,
+you can define the action to notify an user with a callback message with
+``send_user_message('echo',json([content='Hello World!']))``, or disable the user notifications with
+``not(send_user_message(_,_))``. In this last case, only it is taken account if it has the highest priority
+ otherwise if exist a ``send_user_message`` with a higher priority it will be discarded.
 
 
 ### User actions
