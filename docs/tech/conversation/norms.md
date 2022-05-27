@@ -387,13 +387,39 @@ The next conditions are used to interact with the social context builder.
 
 ### Personal context builder conditions
 
-The next conditions are used to interact with the personal context builder
+The next conditions are used to interact with the personal context builder.
+This component can obtain the location of the user if you provide this information
+to the platform using the iLog application.
 
 - ``normalized_closeness(Closeness,Users,MaxDistance)``
   Calculate the closeness (in distance) of the current user to some others.
     * ``Closeness``  _Output_  JSON model list with the userId and value on the range [0,1] with the close in distance to the user. Where 1 is at the same location and on the 0 is too far away.
     * ``Users``  _Input_  string list with the identifiers of the users to calculate the closeness respect the current user.
     * ``MaxDistance``  _Input_  number  the maximum distance that a user can be.
+- ``get_current_location(Location)``
+  Obtain the current location of the user.
+    * ``Location``  _Output_  JSON model with the user identifier, the latitude and longitude where the user is.
+- ``get_current_location(Latitude,Longitude)``
+  Obtain the current location of the user.
+    * ``Latitude``  _Output_  number with the latitude where the user of the norm engine is.
+    * ``Longitude``  _Output_  number with the longitude where the user of the norm engine is.
+- ``is_current_location_near(Latitude,Longitude)``
+  Check if the current location of the user is less than 1 Kilometer over the specified location.
+    * ``Latitude``  _Input_  number with the latitude of the location where the user has to near.
+    * ``Longitude``  _Input_  number with the longitude of the location where the user has to near.
+- ``is_current_location_near(Latitude,Longitude,MaxDistance)``
+  Check if the current location of the user is less than 1 Kilometer over the specified location.
+    * ``Latitude``  _Input_  number with the latitude of the location where the user has to near.
+    * ``Longitude``  _Input_  number with the longitude of the location where the user has to near.
+    * ``MaxDistance``  _Input_  number with the maximum distance between the user location and the specified location. It is in meters.
+- ``is_current_location_near_relevant(Name)``
+  Check if the current location of the user is less than 1 Kilometer over a relevant location defined on the profile.
+    * ``Name``  _Input_  string name or identifier of the relevant location to check if the user is near.
+    * ``Longitude``  _Input_  number with the longitude of the location where the user has to near.
+- ``is_current_location_near_relevant(Name,MaxDistance)``
+  Check if the current location of the user is less than 1 Kilometer over the specified location.
+    * ``Name``  _Input_  string name or identifier of the relevant location to check if the user is near.
+    * ``MaxDistance``  _Input_  number with the maximum distance between the user location and the relevant location. It is in meters.
 
 
 ### Diversity conditions
@@ -749,12 +775,9 @@ The next predicates are used to do HTTP request into an URL.
   Delete a model from an URL.
     * ``Url``  _Input_  string with the URL to delete the model.
 
+
 ### Time
 
-- ``now_to_week_day(WeekDay)``
-  Obtain the week day that is **now**.
-    * ``WeekDay``  _Output_  integer with the week day. It is a value on the range [1,7]
-    where 1 => Monday ... 7=> Sunday.
 - ``timestamp_to_week_day(WeekDay,Timestamp)``
   Obtain the week day from a time stamp.
     * ``WeekDay``  _Output_  integer with the week day. It is a value on the range [1,7]
@@ -845,6 +868,26 @@ The next predicates are used to interact with the profile manager component.
   This predicate returns the relationships defined on a page.
     * ``Relationships``  _Output_  array of JSON models with the relationships defined on the page.
     * ``Page``  _Input_  JSON model with the relationships to get.
+- ``wenet_relevant_locations_of_profile(RelevantLocations, Profile)``
+  Obtain the relevant locations of a profile.
+    * ``RelevantLocations``  _Output_  array of JSON model with the relevant locations.
+    * ``Profile``  _Input_  JSON model of the profile to obtain the relevant locations.
+- ``wenet_id_of_relevant_location(Id, RelevantLocation)``
+  Obtain the identifier of a relevant location.
+    * ``Id``  _Output_  string with the relevant location identifier.
+    * ``RelevantLocation``  _Input_  JSON model of the relevant location to obtain the identifier.
+- ``wenet_label_of_relevant_location(Label, RelevantLocation)``
+    Obtain the label of a relevant location.
+    * ``Label``  _Output_  string with the relevant location label.
+    * ``RelevantLocation``  _Input_  JSON model of the relevant location to obtain the label.
+- ``wenet_longitude_of_relevant_location(Longitude, RelevantLocation)``
+    Obtain the longitude of a relevant location.
+    * ``Longitude``  _Output_  number with the relevant location longitude.
+    * ``RelevantLocation``  _Input_  JSON model of the relevant location to obtain the longitude.
+- ``wenet_latitude_of_relevant_location(Latitude, RelevantLocation)``
+    Obtain the latitude of a relevant location.
+    * ``Latitude``  _Output_  number with the relevant location latitude.
+    * ``RelevantLocation``  _Input_  JSON model of the relevant location to obtain the latitude.
 
 
 ### Task manager
