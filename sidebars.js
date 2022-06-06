@@ -34,6 +34,7 @@ module.exports = {
         'platform/interaction-protocol-engine',
         'platform/personal-context-builder',
         'platform/social-context-builder',
+        'platform/commons-apis',
         'platform/realtime',
         {
             type: 'category',
