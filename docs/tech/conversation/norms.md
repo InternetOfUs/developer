@@ -41,11 +41,17 @@ get_task_attribute_value(StartTime,'startTime')
 The data model of a norm is defined in JSON, and it has the next fields:
 
 - **whenever** is used to define the conditions that have to satisfy to fire the actions.
- 	Each condition can be separated by the conjunctions **and**, **or** or **not**.
+ 	Each condition can be separated by the conjunctions **or** or **and**. Also, they can
+ 	start with **not**.
 - **thenceforth** is used to define the actions to do if the conditions are satisfied.
- 	Each action is separated by the conjunction **and**.
+ 	Each action is separated by the conjunction **and**. Also, they can start with **not**
+ 	or **delay**.
 - **ontology** is used to define new prolog predicates that can be used in any condition
    or action of a norm. If the predicate can be used as an action you must define it as **dynamic**.
+   This field is optional.
+- **description** is a text that describes what this norm is about. This field is optional.
+- **priority** is a number that defines in which order this norm has to be evaluated.
+   The high value represents the highest priority. This field is optional.
 
 The next example is the JSON representation of a norm to send an error to the user if try to create a task
 with the start time less than or equals to now.
@@ -174,6 +180,23 @@ An event is a message that a norm engine is sent to itself after a delay in seco
 engine and evaluate again the norms. For example: imagine a task that you want to close after a day, then you may define a
 norm that when the task is created send an event to be delivered after a day, and another norm to close the task when
 this event is received.
+
+
+## Norms priority
+
+The evaluation of the norms is done using its priority, from the higher priority to the lowest.
+This is used to fix any conflict that will appear during the execution of the actions. For example,
+if exist a fired norm that adds an action to send a user message, and another norm adds an action
+to not send a user message. This is a conflict, and the norm engine does only the action that has more
+priority and discards the other.
+
+When you define a norm you can specify its priority, the higher value you put the higher priority
+the norm has. If you did not specify the priority, it gets a default value depending on where it is defined
+and its position inside the list of the norms. Specifically, it is calculated as
+**MinPriority + size - norm_index**. For a norm in a **task** the minimum priority is **50000**,
+for a **profile** is **40000**, for a **community** is **30000**, and for a **task type** is **20000**.
+So, if we have seven individual norms and the third does not have a priority, it will have the priority
+**40005 = 40000 + 7 - 2** (remember the index on a list starts with **0**).
 
 
 ## Conditions
@@ -387,13 +410,39 @@ The next conditions are used to interact with the social context builder.
 
 ### Personal context builder conditions
 
-The next conditions are used to interact with the personal context builder
+The next conditions are used to interact with the personal context builder.
+This component can obtain the location of the user if you provide this information
+to the platform using the iLog application.
 
 - ``normalized_closeness(Closeness,Users,MaxDistance)``
   Calculate the closeness (in distance) of the current user to some others.
     * ``Closeness``  _Output_  JSON model list with the userId and value on the range [0,1] with the close in distance to the user. Where 1 is at the same location and on the 0 is too far away.
     * ``Users``  _Input_  string list with the identifiers of the users to calculate the closeness respect the current user.
     * ``MaxDistance``  _Input_  number  the maximum distance that a user can be.
+- ``get_current_location(Location)``
+  Obtain the current location of the user.
+    * ``Location``  _Output_  JSON model with the user identifier, the latitude and longitude where the user is.
+- ``get_current_location(Latitude,Longitude)``
+  Obtain the current location of the user.
+    * ``Latitude``  _Output_  number with the latitude where the user of the norm engine is.
+    * ``Longitude``  _Output_  number with the longitude where the user of the norm engine is.
+- ``is_current_location_near(Latitude,Longitude)``
+  Check if the current location of the user is less than 1 Kilometer over the specified location.
+    * ``Latitude``  _Input_  number with the latitude of the location where the user has to near.
+    * ``Longitude``  _Input_  number with the longitude of the location where the user has to near.
+- ``is_current_location_near(Latitude,Longitude,MaxDistance)``
+  Check if the current location of the user is less than 1 Kilometer over the specified location.
+    * ``Latitude``  _Input_  number with the latitude of the location where the user has to near.
+    * ``Longitude``  _Input_  number with the longitude of the location where the user has to near.
+    * ``MaxDistance``  _Input_  number with the maximum distance between the user location and the specified location. It is in meters.
+- ``is_current_location_near_relevant(Name)``
+  Check if the current location of the user is less than 1 Kilometer over a relevant location defined on the profile.
+    * ``Name``  _Input_  string name or identifier of the relevant location to check if the user is near.
+    * ``Longitude``  _Input_  number with the longitude of the location where the user has to near.
+- ``is_current_location_near_relevant(Name,MaxDistance)``
+  Check if the current location of the user is less than 1 Kilometer over the specified location.
+    * ``Name``  _Input_  string name or identifier of the relevant location to check if the user is near.
+    * ``MaxDistance``  _Input_  number with the maximum distance between the user location and the relevant location. It is in meters.
 
 
 ### Diversity conditions
@@ -432,6 +481,44 @@ between the time the norm engine is started and midnight, January 1, 1970, UTC.
 - ``is_now_equal_to(Time)``
   This condition is **true** when **now** is equal to a value.
     * ``Time``  _Input_  integer time in seconds to check.
+- ``is_now_on_week_day(WeekDay)``
+  Check if **now** is on the specified week day.
+    * ``WeekDay``  _Input_  integer with the week day that has to be **now**. It is a value on the range [1,7]
+    where 1 => Monday ... 7=> Sunday.
+- ``is_now_one_of_week_days(WeekDays)``
+  Check if **now** is on the specified week day.
+    * ``WeekDays``  _Input_  array of integer with the week days that can be **now**.
+    A weekday is a value on the range [1,7] where 1 => Monday ... 7=> Sunday.
+- ``is_now_on_monday()``
+  Check if **now** is on Monday.
+- ``is_now_on_tuesday()``
+  Check if **now** is on Tuesday.
+- ``is_now_on_wednesday()``
+  Check if **now** is on Wednesday.
+- ``is_now_on_thursday()``
+  Check if **now** is on Thursday.
+- ``is_now_on_friday()``
+  Check if **now** is on Friday.
+- ``is_now_on_saturday()``
+  Check if **now** is on Saturday.
+- ``is_now_on_sunday()``
+  Check if **now** is on Sunday.
+- ``is_now_before_time(Time)``
+  Check if now is before the specified time.
+    * ``Time``  _Input_  string on the format H:M where H is between 00 and 23, and MM between 00 and 59.
+- ``is_now_before_time_or_equals(Time)``
+  Check if now is before or equals to the specified time.
+    * ``Time``  _Input_  string on the format H:M where H is between 00 and 23, and MM between 00 and 59.
+- ``is_now_after_time(Time,String)``
+  Check if now is after the specified time.
+    * ``Time``  _Input_  string on the format H:M where H is between 00 and 23, and MM between 00 and 59.
+- ``is_now_after_time_or_equals(Time)``
+  Check if now is after or equals to the specified time.
+    * ``Time``  _Input_  string on the format H:M where H is between 00 and 23, and MM between 00 and 59.
+- ``is_now_between_times(Lower,Upper)``
+  heck if now is between the specified times.
+    * ``Lower``  _Input_  string on the format H:M where H is between 00 and 23, and MM between 00 and 59.
+    * ``Upper``  _Input_  string on the format H:M where H is between 00 and 23, and MM between 00 and 59.
 
 
 ### JSON conditions
@@ -455,10 +542,14 @@ The next conditions are used to manage JSON models.
 
 ## Actions
 
-The norms to do when the conditions of a norm are predicates separated by the conjunction ``and``. You can use
-any predicate defined by the [SWI Prolog](https://www.swi-prolog.org/), but before you have to mark it as ``dynamic``
-on the ontology of the norm. The next sections show the most common actions that have been provided to help
-to the norm definition.
+The norms to do when the conditions of a norm are predicates separated by the conjunction ``and``.
+You can use any of the predicates defined on the next sections, any predicate defined by the [SWI Prolog]
+(https://www.swi-prolog.org/)(but before you have to mark it as ``dynamic`` on the ontology of the norm),
+disable any action with ``not(Action)``, or delay any action with ``delay(Action,Duration)``. For example,
+you can define the action to notify an user with a callback message with
+``send_user_message('echo',json([content='Hello World!']))``, or disable the user notifications with
+``not(send_user_message(_,_))``. In this last case, only it is taken account if it has the highest priority
+ otherwise if exist a ``send_user_message`` with a higher priority it will be discarded.
 
 
 ### User actions
@@ -712,6 +803,30 @@ The next predicates are used to do HTTP request into an URL.
     * ``Url``  _Input_  string with the URL to delete the model.
 
 
+### Time
+
+- ``timestamp_to_week_day(WeekDay,Timestamp)``
+  Obtain the week day from a time stamp.
+    * ``WeekDay``  _Output_  integer with the week day. It is a value on the range [1,7]
+    where 1 => Monday ... 7=> Sunday.
+    * ``Timestamp``  _Input_  integer with the seconds from the midnight, January 1, 1970, UTC.
+- ``string_to_time(Time,String)``
+  Return the time associated to a string.
+    * ``Time``  _Output_  string on the format H:M where H is between 00 and 23, and MM between 00 and 59.
+    * ``String``  _Input_  string with the time to extract.
+- ``normalized_time(Time,String)``
+  Return the normalized time
+    * ``Time``  _Output_  string on the format H:M where H is between 00 and 23, and MM between 00 and 59.
+    * ``String``  _Input_  string to normalize.
+- ``timestamp_to_time(Time,Timestamp)``
+  Return the time associated to a time stamp.
+    * ``Time``  _Output_  string on the format H:M where H is between 00 and 23, and MM between 00 and 59.
+    * ``Timestamp``  _Input_  integer  with the epoch time since January 1, 1970 in seconds.
+- ``now_to_time(Time)``
+  Return the time associated to now.
+    * ``Time``  _Output_  string on the format H:M where H is between 00 and 23, and MM between 00 and 59.
+
+
 ### Utils
 
 - ``wenet_remove(Result,Element,List)``
@@ -780,6 +895,26 @@ The next predicates are used to interact with the profile manager component.
   This predicate returns the relationships defined on a page.
     * ``Relationships``  _Output_  array of JSON models with the relationships defined on the page.
     * ``Page``  _Input_  JSON model with the relationships to get.
+- ``wenet_relevant_locations_of_profile(RelevantLocations, Profile)``
+  Obtain the relevant locations of a profile.
+    * ``RelevantLocations``  _Output_  array of JSON model with the relevant locations.
+    * ``Profile``  _Input_  JSON model of the profile to obtain the relevant locations.
+- ``wenet_id_of_relevant_location(Id, RelevantLocation)``
+  Obtain the identifier of a relevant location.
+    * ``Id``  _Output_  string with the relevant location identifier.
+    * ``RelevantLocation``  _Input_  JSON model of the relevant location to obtain the identifier.
+- ``wenet_label_of_relevant_location(Label, RelevantLocation)``
+    Obtain the label of a relevant location.
+    * ``Label``  _Output_  string with the relevant location label.
+    * ``RelevantLocation``  _Input_  JSON model of the relevant location to obtain the label.
+- ``wenet_longitude_of_relevant_location(Longitude, RelevantLocation)``
+    Obtain the longitude of a relevant location.
+    * ``Longitude``  _Output_  number with the relevant location longitude.
+    * ``RelevantLocation``  _Input_  JSON model of the relevant location to obtain the longitude.
+- ``wenet_latitude_of_relevant_location(Latitude, RelevantLocation)``
+    Obtain the latitude of a relevant location.
+    * ``Latitude``  _Output_  number with the relevant location latitude.
+    * ``RelevantLocation``  _Input_  JSON model of the relevant location to obtain the latitude.
 
 
 ### Task manager
