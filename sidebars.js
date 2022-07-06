@@ -13,7 +13,7 @@ module.exports = {
             type: 'category',
             label: 'App Development',
             items: [
-                'tech/app/intro',
+                //'tech/app/intro',
                 'tech/app/platform-api'
             ]
         },

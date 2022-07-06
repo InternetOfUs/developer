@@ -13,6 +13,8 @@ The first step is to become a developer in the [WeNet HUB](/docs/platform/servic
 
 The next step is to create a new WeNet application, To do so go in the `Developer` Menu and click on the `Create a new app` button. Then fill all the required information. During the Oauth2 configuration, the paltform will require to choose the scopes that the application requires (For a detailed description of the scopes look [here](platform-api#scopes)). Keep in mind that during the login, the user can negate the access to some scopes at your application.
 
+If you are planning to create a conversational application, the next step is to create an AppLogic and setup a conversational connector. Follow the instruction in this page 
+
 <!-- TODO: converational connector and app logic -->
 
 
