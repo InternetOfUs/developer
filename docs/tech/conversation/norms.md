@@ -285,6 +285,38 @@ The next conditions are over the user associated with the norm engine (**me**).
   This condition obtains the best 1k social network relationships of the current user repect
   the other application users. value of a user state attribute, or a default value if it is not defined.
     * ``Relationships``  _Output_  array of JSON models with my social network relationships.
+- ``get_profile_competence(Competence,Label)``
+  Obtain the competence on my profile with the specified name.
+    * ``Competence``  _Output_  JSON model with the competence information, or @(null) if can not obtain it.
+    * ``Name``  _Input_  string name of the competence to obtain.
+- ``get_profile_competence(Competence,Profile,Name,DefaultValue)``
+  Obtain the competence on a profile with the specified name.
+    * ``Competence``  _Output_  JSON model with the competence information, or @(null) if can not obtain it.
+    * ``Profile``  _Input_  JSON model with the competence to search.
+    * ``Name``  _Input_  string name of the competence to obtain.
+    * ``DefaultValue``  _Input_  value to return if not found the competence.
+- ``get_profile_material(Material,Label)``
+  Obtain the material on my profile with the specified name.
+    * ``Material``  _Output_  JSON model with the material information, or @(null) if can not obtain it.
+    * ``Name``  _Input_  string name of the material to obtain.
+- ``get_profile_material(Material,Profile,Name,DefaultValue)``
+  Obtain the material on a profile with the specified name.
+    * ``Material``  _Output_  JSON model with the material information, or @(null) if can not obtain it.
+    * ``Profile``  _Input_  JSON model with the material to search.
+    * ``Name``  _Input_  string name of the material to obtain.
+    * ``DefaultValue``  _Input_  value to return if not found the material.
+- ``get_profile_meaning(Meaning,Label)``
+  Obtain the meaning on my profile with the specified name.
+    * ``Meaning``  _Output_  JSON model with the meaning information, or @(null) if can not obtain it.
+    * ``Name``  _Input_  string name of the meaning to obtain.
+- ``get_profile_meaning(Meaning,Profile,Name,DefaultValue)``
+  Obtain the meaning on a profile with the specified name.
+    * ``Meaning``  _Output_  JSON model with the meaning information, or @(null) if can not obtain it.
+    * ``Profile``  _Input_  JSON model with the meaning to search.
+    * ``Name``  _Input_  string name of the meaning to obtain.
+    * ``DefaultValue``  _Input_  value to return if not found the meaning.
+
+
 
 
 ### Application conditions
@@ -454,6 +486,13 @@ The next conditions are used to manage the diversity of some users.
     * ``Diversity``  _Output_  JSON model list with the userId and value on the range [0,1] with the diversity of the user. Where 1 is the maximum diversity and 0 that the user is similar to.
     * ``Users``  _Input_  string list with the identifiers of the users to calculate the diversity respect the current user.
     * ``Attributes``  _Input_  string list  with the names of the attributes of the profile to calculate the diversity.
+- ``normalized_diversity(Diversity,Users,Attributes,DefaultValue,MatchAll)``
+  Calculate the diversity of the current user over some other users spscifing the default value and if has to match all teh atributes or at least one.
+    * ``Diversity``  _Output_  JSON model list with the userId and value on the range [0,1] with the diversity of the user. Where 1 is the maximum diversity and 0 that the user is similar to.
+    * ``Users``  _Input_  string list with the identifiers of the users to calculate the diversity respect the current user.
+    * ``Attributes``  _Input_  string list  with the names of the attributes of the profile to calculate the diversity.
+    * ``DefaultValue``  _Input_  any value to set if can not caluclate the diversity.
+    * ``MatchAll``  _Input_  boolean it is true if has to match all the attributes, or false if it has to match at least one.
 - ``my_profile_attributes_similars_to(Attributes,Text,MinSimilarity)``
   Obtain the attributes of my profile that has a similarity to a text equal or greater than the minimum.
     * ``Attributes``  _Output_  string list  with the name of the profile attributes that are similar to the text.
@@ -661,6 +700,10 @@ These actions interact with the other components of the WeNet platform.
 - ``notify_social_context_builder_message_sent(Message)``
   This action notifies the social context builder that a message is sent to the user.
     * ``Message``  _Input_  JSON model with the sent message.
+- ``social_ranking(ShuffledUserIds,UserIds)``
+  Shuffle the user based on diversity attributes.
+    * ``ShuffledUserIds``  _Output_  array of strings with the shuffled user ids.
+    * ``UserIds``  _Input_  array of strings with the user identifiers to shuffle.
 
 
 ## Other Useful Norms predicates
@@ -850,6 +893,12 @@ The next predicates are used to do HTTP request into an URL.
   [here](https://www.swi-prolog.org/pldoc/man?section=functions). For example: ``wenet_format(4,2+2)``
     * ``Result``  _Output_  number with the result of the arithmetical expression.
     * ``Expr``  _Input_  mathematical expression to evaluate.
+- ``wenet_json_element_with(Element,Arrray,Field,DefaultValue)``
+  Obtain an elment of a list of json values.
+    * ``Element``  _Output_  json with the found element.
+    * ``Array``  _Input_  array of json elements to search.
+    * ``Field``  _Input_  pair key=value that has to be defined on the element to get.
+    * ``DefaultValue``  _Input_  json value to return if not found the element.
 
 
 ### Profile manager
@@ -904,17 +953,45 @@ The next predicates are used to interact with the profile manager component.
     * ``Id``  _Output_  string with the relevant location identifier.
     * ``RelevantLocation``  _Input_  JSON model of the relevant location to obtain the identifier.
 - ``wenet_label_of_relevant_location(Label, RelevantLocation)``
-    Obtain the label of a relevant location.
+  Obtain the label of a relevant location.
     * ``Label``  _Output_  string with the relevant location label.
     * ``RelevantLocation``  _Input_  JSON model of the relevant location to obtain the label.
 - ``wenet_longitude_of_relevant_location(Longitude, RelevantLocation)``
-    Obtain the longitude of a relevant location.
+  Obtain the longitude of a relevant location.
     * ``Longitude``  _Output_  number with the relevant location longitude.
     * ``RelevantLocation``  _Input_  JSON model of the relevant location to obtain the longitude.
 - ``wenet_latitude_of_relevant_location(Latitude, RelevantLocation)``
-    Obtain the latitude of a relevant location.
+  Obtain the latitude of a relevant location.
     * ``Latitude``  _Output_  number with the relevant location latitude.
     * ``RelevantLocation``  _Input_  JSON model of the relevant location to obtain the latitude.
+- ``wenet_new_diversity_data_match_all(Data,UserIds,AttributeNames)``
+  Create the data necessary to calculate the diversity for some users and for all the attributes.
+    * ``Data``  _Output_  JSON with the information of the users to calculate the diversity.
+    * ``UserIds``  _Input_  list of strings with the identifier of the users to calculate the diversity.
+    * ``AttributeNames``  _Input_  list of strings with the names for the attributes to calculate the diversity.
+- ``wenet_new_diversity_data_match_at_least_one``
+  Create the data necessary to calculate the diversity for some users and for at least one attribute.
+    * ``Data``  _Output_  JSON with the information of the users to calculate the diversity.
+    * ``UserIds``  _Input_  list of strings with the identifier of the users to calculate the diversity.
+    * ``AttributeNames``  _Input_  list of strings with the names for the attributes to calculate the diversity.
+- ``wenet_profile_manager_operations_calculate_diversity(Diversity,Data)``
+  Obtain the diversity form a set of users.
+    * ``Diversity``  _Output_  number on the range [0,1] that represents the users diversity.
+    * ``Data``  _Input_  JSON with the information of the users to calculate the diversity.
+- ``wenet_new_similarity_data(Data,UserId,Source)``
+  Create the data necessary to calculate the similarity for some attributes.
+    * ``Data``  _Output_  JSON with the information of the attributes to calculate the similarity.
+    * ``UserId``  _Input_  string with the user identifier.
+    * ``Source``  _Input_  string with the text to compare.
+- ``wenet_profile_manager_operations_calculate_similarity(Similarity,Data)``
+  Obtain the similarity form a set of attributes.
+    * ``Similarity``  _Output_  JSON with the attribute as name and a value its similarity..
+    * ``Data``  _Input_  JSON with the information of the attributes to calculate the similarity..
+- ``wenet_attributes_of_similarity_result(Attributes,SimilarityResult,MinSimilarity)``
+  Obtain from the similarity operation result the attributes with a minimum similarity value.
+    * ``Attributes``  _Output_  string list of attribute names.
+    * ``SimilarityResult``  _Input_  pair list with the attribute=similarity values obtained form the similarity operation.
+    * ``MinSimilarity``  _Input_  number minimum similarity, exclusive, to get the attribute..
 
 
 ### Task manager
@@ -1347,6 +1424,10 @@ The next predicates are used to interact with the social context builder compone
     * ``Timestamp``  _Input_  number with the UTC epoch timestamp when the interaction is done.
     * ``SenderId``  _Input_  string with the identifier of the user that started the interaction.
     * ``Message``  _Input_  JSON model with the message that is sent to the user.
+- ``wenet_social_context_builder_post_social_shuffle(ShuffledUserIds,UserIds)``
+  Shuffle the user based on diversity attributes.
+    * ``ShuffledUserIds``  _Output_  JSON model with the interaction message between the users.
+    * ``UserIds``  _Input_  array of strings with the shuffled user ids.
 
 
 ### Personal context builder
@@ -1470,3 +1551,10 @@ to use them.
   Use wenet_target_id_of_relationship instead.
     * ``UserId``  _Output_  string eith the user identifier of the relationship.
     * ``Relationship``  _Input_  JSON model to get the user identifier.
+
+- ``wenet_new_diversity_data(Data,UserIds,AttributeNames)``
+  Create the data necessary to calculate the diversity for some users.
+  Use wenet_new_diversity_data_match_all
+    * ``Data``  _Output_  JSON with the information of the users to calculate the diversity.
+    * ``UserIds``  _Input_   list of strings with the identifier of the users to calculate the diversity.
+    * ``AttributeNames``  _Input_   list of strings with the names for the attributes to calculate the diversity.
